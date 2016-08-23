@@ -35,3 +35,11 @@ you can fix it by changing the session locale:
 export LC_ALL="en_US.UTF-8"
 ```
 
+## Default locale
+
+To set the default locale and reconfigure them:
+
+```
+locale-gen en_US en_US.UTF-8
+dpkg-reconfigure locales
+```
