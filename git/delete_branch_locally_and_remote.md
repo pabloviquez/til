@@ -6,7 +6,7 @@
 git checkout -b branch_abc
 
 
-... Change stuff ...
+# ... Change stuff ...
 
 # Commit changes
 git commit -m "Some changes xyz"
@@ -18,7 +18,7 @@ git push -u origin branch_abc
 
 ## Delete the branch locally
 
-```
+```bash
 git checkout master
 
 git branch -d branch_abc
@@ -28,6 +28,8 @@ git branch -d branch_abc
 
 Once deleted locally, you need to push the changes to remote, letting the server know the branch was deleted
 
-```
+```bash
+
 git push origin --delete branch_abc
+
 ```
