@@ -98,6 +98,18 @@ Now push changes to origin remote
 git push -u origin integration
 ```
 
+### 6. Merge changes into master
+
+1. Switch to master
+2. Merge branch integration into master
+
+```
+git checkout master
+git merge --no-ff integration
+git push -u origin master
+```
+
+**YOU'RE DONE! HAPPY FORKING**
 
 ## Notes
 
