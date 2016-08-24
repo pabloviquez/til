@@ -14,7 +14,7 @@ Main development will happen in `origin` and changes from `yyyyyy` needs to be m
 By doing this, origin is automatically point it to the bitbucket repo
 
 ```
-git clone ssh://git@bitbucket.org/aleemb/myrepository.git
+git clone ssh://git@bitbucket.org/pabloviquez/myrepository.git
 cd myrepository
 ```
 
@@ -29,8 +29,8 @@ List all remotes in the repo:
 ```
 > git remote -v
 
-origin  ssh://git@git.na.possible.com:2222/flor/flo.git (fetch)
-origin  ssh://git@git.na.possible.com:2222/flor/flo.git (push)
+origin  ssh://git@bitbucket.org/pabloviquez/myrepository.git (fetch)
+origin  ssh://git@bitbucket.org/pabloviquez/myrepository.git (push)
 yyyyyy  git@github.com:pabloviquez/my_original_repo.git (fetch)
 yyyyyy  git@github.com:pabloviquez/my_original_repo.git (push)
 ```
