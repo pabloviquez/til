@@ -10,6 +10,10 @@ sudo ntpdate time.nist.gov
 
 The command above updates the machine to the time given my `time.nist.gov` server.
 
+## Reference
+
+List of servers and more details about the protocol: http://www.pool.ntp.org/en/use.html
+
 ## Troubleshoot
 
 ### the NTP socket is in use, exiting
