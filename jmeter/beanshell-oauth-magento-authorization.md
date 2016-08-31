@@ -14,16 +14,6 @@ Requires you to enter the values of
 * OAUTH_SIGNATURE_METHOD
 
 
-String oSignature; // oauth_signature
-String oSecret = vars.get("");
-
-Map oSignatureMap = new TreeMap();
-oSignatureMap.put("oauth_version", vars.get("OAUTH_VERSION"));
-oSignatureMap.put("oauth_nonce", generateNonce());
-oSignatureMap.put("oauth_callback", vars.get("OAUTH_CALLBACK"));
-oSignatureMap.put("oauth_consumer_key", vars.get("OAUTH_CONSUMER_KEY"));
-oSignatureMap.put("oauth_signature_method", vars.get("OAUTH_SIGNATURE_METHOD"));
-
 ```java
 import org.apache.commons.httpclient.auth.DigestScheme;
 import org.apache.commons.codec.binary.Base64;
