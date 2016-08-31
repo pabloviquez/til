@@ -34,7 +34,7 @@ Added the configuration into the `etc/local.xml` file:
 
             <!-- New Database to Use -->
 
-            <design_studio>
+            <new_database_xyz>
                 <connection>
                     <host><![CDATA[yyyy]]></host>
                     <username><![CDATA[yyyy]]></username>
@@ -46,7 +46,7 @@ Added the configuration into the `etc/local.xml` file:
                     <pdoType><![CDATA[]]></pdoType>
                     <active>1</active>
                 </connection>
-            </design_studio>
+            </new_database_xyz>
         </resources>
 
         <!-- ... -->
