@@ -13,6 +13,9 @@ Requires you to enter the values of
 * OAUTH_CONSUMER_KEY
 * OAUTH_SIGNATURE_METHOD
 
+### Beanshell PreProcessor for the request
+
+Will add the OAuth authorization header to the request
 
 ```java
 import org.apache.commons.httpclient.auth.DigestScheme;
