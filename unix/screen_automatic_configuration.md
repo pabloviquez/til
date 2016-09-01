@@ -6,7 +6,7 @@ Screen is awesome, close your terminal go home, comeback and you have everything
 screen
 ```
 
-Out of the box is weird but con can configure it so loads everything just like you want automatically:
+Out of the box is weird but you can configure it so loads everything just like you want automatically:
 
 ## Screen Config
 
