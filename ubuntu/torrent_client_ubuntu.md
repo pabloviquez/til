@@ -16,7 +16,13 @@ For this config file, the downloads will be downloaded in the directory `downloa
 * `directory = ./downloads/leeching`
 * `schedule = watch_directory,5,5,load_start=./downloads/rtactive/*.torrent`
 * `system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,./downloads/unsorted/;d.set_directory=./downloads/unsorted/"`
+* `session = ./downloads/.rtorrent`
 
+You need to create the directory `.rtorrent` inside the `downloads` directory:
+
+```bash
+mkdir downloads/.rtorrent
+```
 
 **Config File**
 
@@ -54,7 +60,7 @@ directory = ./downloads/leeching
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
-session = ./.rtorrent
+session = ./downloads/.rtorrent
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
