@@ -21,7 +21,9 @@ For this config file, the downloads will be downloaded in the directory `downloa
 You need to create the directory `.rtorrent` inside the `downloads` directory:
 
 ```bash
-mkdir downloads/.rtorrent
+mkdir -p ./downloads/.rtorrent
+mkdir -p ./downloads/.rtorrent
+mkdir -p ./downloads/.rtorrent
 ```
 
 **Config File**
