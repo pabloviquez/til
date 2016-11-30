@@ -145,7 +145,7 @@ schedule = sort_active,14,5,view.sort=active
 
 ## How to use it
 
-Cmd     Action
+Cmd    | Action
 -------|------------------
 Ctrl-q |  Quit application
 Ctrl-s | Start download. Runs hash first unless already done.
