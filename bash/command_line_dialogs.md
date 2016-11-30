@@ -36,8 +36,8 @@ dialog --clear \
 
 ### Explanation
 
-`--clear` : Clears the widget screen, keeping only the screen_color background.
-`20 60 15` : Height, Width, Inner box height 
+* `--clear` : Clears the widget screen, keeping only the screen_color background.
+* `20 60 15` : Height, Width, Inner box height 
 
 
  # How to use it as a bash function
