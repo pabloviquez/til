@@ -145,9 +145,24 @@ schedule = sort_active,14,5,view.sort=active
 
 ## How to use it
 
-```
-CTRL-S      : Start Download
-CTRL-D      : Stop download
-CTRL-D (x2) : Delete torrent (does not delete download)
-CTRL-Q      : Quit app
-```
+Cmd     Action
+-------|------------------
+Ctrl-q |  Quit application
+Ctrl-s | Start download. Runs hash first unless already done.
+Ctrl-d | Stop an active download or remove a stopped download
+Ctrl-k | Stop and close the files of an active download.
+Ctrl-r | Initiate hash check of torrent. Starts downloading if file is not available.
+Ctrl-o | Specify the download directory for a added, but not started torrent.
+Left   | Returns to the previous screen
+Right  | Goes to the next screen
+Backspace |   Adds and starts the specified *.torrent
+Return | Adds and doesn't start the specified *.torrent
+`a|s|d` |  Increase global upload throttle about 1|5|50 KB/s
+`A|S|D` |  Increase global download throttle about 1|5|50 KB/s
+`z|x|c` |   Decrease global upload throttle about 1|5|50 KB/s
+`Z|X|C` |   Decrease global download throttle about 1|5|50 KB/s 
+
+
+## Reference
+
+[ rTorrent Wiki ](https://wiki.archlinux.org/index.php/RTorrent)
