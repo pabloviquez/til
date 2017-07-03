@@ -56,7 +56,7 @@ my_module.my_module.*:
             translatable: false
 ```
 
-And lets say I have previusly saved 3 specific items:
+And lets say I have previously saved 3 specific items:
 
 **my_module/config/install/my_module.my_module.specific_item_a.yml**
 ```
