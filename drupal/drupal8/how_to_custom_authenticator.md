@@ -39,13 +39,13 @@ The magic in this service configuration file is the tag section. By adding the t
 Drupal automatically will add the service to the authenticator provider list using as key the *provider_id* data.
 
 ### Important notes about the service definition
-# You must use as *provider_id* the module name
-# Arguments can be whatever, just make sure you pass to your class whatever instance you will need
+* You must use as *provider_id* the module name
+* Arguments can be whatever, just make sure you pass to your class whatever instance you will need
 
 ## Authenticator implementation
 
 You must implement the interface *Drupal\Core\Authentication\AuthenticationProviderInterface* for your authenticator to work
 and basically implement 2 methods:
-# *public function applies(Request $request)*
-# *public function authenticate(Request $request)*
+* *public function applies(Request $request)*
+* *public function authenticate(Request $request)*
 
