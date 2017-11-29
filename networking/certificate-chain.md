@@ -10,7 +10,9 @@ While it works fine for an Apache server, it does not for AWS Certicate Manager.
 
 ## Problem
 
-Ask for it to the guys who initially provided it in the first place. While this is the most logical option, it was not possible at this time, mostly because any request to them takes forever and the setup had to be done as soon as possible.
+Asking for it to the guys who initially provided the certificate in the first place.
+
+While this is the most logical option, it was not possible at this time, mostly because any request to them takes forever and the setup had to be done as soon as possible.
 
 ## SSL/HTTPS Context
 
