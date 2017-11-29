@@ -28,7 +28,7 @@ So this is what the certificate chain is used for, which means that, the server 
 
 ## Solution : Get the certificate chain from the remote site
 
-The domain I was trying to setup, was a second level domain, which looks liks this: *mysubdomain.domain.com* 
+The domain I was trying to setup, was a third level domain, which looks like this: *mysubdomain.domain.com* 
 
 So I had access to **domain.com**
 
