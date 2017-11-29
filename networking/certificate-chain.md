@@ -16,11 +16,15 @@ While this is the most logical option, it was not possible at this time, mostly 
 
 ## SSL/HTTPS Context
 
-SSL communications basically uses a key exchange between the server and the client, the reason why you need a certificate chain, is because the client which in a normal case is the browser, needs to validate that the server using *certificate X* is who he says it's and also, that the key is using, is still valid and the company who issued the certificate in the first place validates that the server certificate is valid.
+SSL communications basically uses a key exchange between the server and the client, the reason why you need a certificate chain, it's because the client; which in a normal case is the browser, validates the certificate:
 
-So the certificate chain is used for that, which means that, the server will give me the certificate chain in the response so the browser can validate the certicate.
+1. Server certificate has not expired
+2. The server certificate was issued to the actual URL
+3. The certificate can be verified agains the company who issue the certificate in the first place
 
-**And there was the solution!**
+So the certificate chain is used for that, which means that, the server will return the certificate chain in the response so the browser can validate the certicate.
+
+**And that's exactly what I'm looking for**
 
 ## Solution : Get the certificate chain from the remote site
 
