@@ -22,7 +22,7 @@ SSL communications basically uses a key exchange between the server and the clie
 2. The server certificate was issued to the actual URL
 3. The certificate can be verified agains the company who issue the certificate in the first place
 
-So the certificate chain is used for that, which means that, the server will return the certificate chain in the response so the browser can validate the certicate.
+So this is what the certificate chain is used for, which means that, the server will return the certificate chain in the response so the browser can validate the certicate.
 
 **And that's exactly what I'm looking for**
 
