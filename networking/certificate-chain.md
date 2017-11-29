@@ -321,6 +321,8 @@ MqO5tzHpCvX2HzLc
 
 ### Include the full chain with the CA
 
+You can use this other version (which is valid) if you want to include the full chain, that's the intermediate certificate and the root CA certificate.
+
 **certchain_with_ca.crt**
 ```
 -----BEGIN CERTIFICATE-----
@@ -372,4 +374,4 @@ b8ravHNjkOR/ez4iyz0H7V84dJzjA1BOoa+Y7mHyhD8S
 ```
 
 
- 
+ Done, happy AWS Cert Managing...
