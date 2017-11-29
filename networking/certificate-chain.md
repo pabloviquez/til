@@ -45,7 +45,7 @@ For the sake of the exercise, I'm going to use Google.
 ![Google Certificate Chain](img/google_cert_chain.png)
  
 ```
-> openssl s_client -servername att.com -connect google.com:443
+> openssl s_client -servername google.com -connect google.com:443
 
 
 CONNECTED(00000009)
