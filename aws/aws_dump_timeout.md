@@ -13,7 +13,7 @@ Error 2013: Lost connection to MySQL server during query when dumping table
 To be able to resolve this, you need to compress the database communication between client-server:
 
 ```
-mysqldump -h attthanks-prod-db-a.cueogitufcyw.us-east-1.rds.amazonaws.com \
+mysqldump -h your.aws.host.db.amazonaws.com \
     --single-transaction \
     --opt \
     --routines \
