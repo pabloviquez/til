@@ -114,10 +114,10 @@ $locationFile->setFlags(\SplFileObject::READ_CSV | \SplFileObject::DROP_NEW_LINE
 foreach($locationFile as $location) {
     if (!empty($location[0])) {
         $city = new LocationPoint(
-            $cityData[0],
-            $cityData[1],
-            $cityData[3],
-            $cityData[2]
+            $location[0],
+            $location[1],
+            $location[3],
+            $location[2]
         );
         $quadTree->insert($city);
     }
@@ -146,9 +146,10 @@ $searchResult = $citiesQuadTree->search($searchBoundingBox);
 # Search Notes
 The search does require a small calculation for the box which is not a trivial task.
 
+## Latitude & Longitude Accuracy
 Latitudes and longitudes have an accuracy depending on how many decimals they have:
 
-Lat/Long Decimal Points | Accuracy Miles | Accuracy KM
+Lat/Long Decimal Points | Accuracy KM | Accuracy Miles
 --- | --- | ---
 33.0 | 111.32 km | 69.17 mi
 33.9 | 11.132 km | 6.917 mi
@@ -159,6 +160,58 @@ Lat/Long Decimal Points | Accuracy Miles | Accuracy KM
 33.977913 | 111.32 mm | 4.3826 inches
 33.9779134 | 11.132 mm | 0.4382 inches
 
+## Search quad
+To be able to search for a Quadran of 10km, we need to know the size of it in location points.
+
+These values can be calculated using the Harvesine function in either miles or kilometers.
+
+```php
+/**
+ * Returns the quadrant size to use for a given size.
+ *
+ * @param int $quadSize
+ *   Size in miles or kilometers
+ *
+ * @param string $metric
+ *   m for miles or k for kilometers
+ *
+ * @return float
+ */
+function getDistance(int $quadSize, string $metric) {
+    switch($metric) {
+        case 'm' :
+            $earthRadius = 3959;
+            break;
+        default
+            $earthRadius = 6371;
+    }
+
+    $dLat = deg2rad($latitude2 - $latitude1);
+    $dLon = deg2rad($longitude2 - $longitude1);
+
+    $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);
+    $c = 2 * asin(sqrt($a));
+    $d = $earthRadius * $c;
+
+    return $d;
+}
+
+```
+
+### Harvesine Formula
+<p>
+x = Δλ ⋅ cos φ<sub>m</sub>
+y = Δφ
+d = R ⋅ √x² + y²
+</p>
+
+```
+x = Δλ ⋅ cos φm
+y = Δφ
+d = R ⋅ √x² + y²
+```
+
+Where **R** is the earth radius
 
 
 
