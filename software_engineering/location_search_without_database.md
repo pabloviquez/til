@@ -167,17 +167,21 @@ These values can be calculated using the Harvesine function in either miles or k
 
 ```php
 /**
- * Returns the quadrant size to use for a given size.
+ * Harvesine formula. Returns the distance between two given points.
  *
- * @param int $quadSize
- *   Size in miles or kilometers
- *
- * @param string $metric
- *   m for miles or k for kilometers
- *
+ * @param int $earthRadius Use k for kilometers or m for miles
+ * @param float $latitude1
+ * @param float $longitude1
+ * @param float $latitude2
+ * @param float $longitude2
  * @return float
  */
-function getDistance(int $quadSize, string $metric) {
+function harvesine(string $metric,
+    float $latitude1,
+    float $longitude1,
+    float $latitude2,
+    float $longitude2) {
+
     switch($metric) {
         case 'm' :
             $earthRadius = 3959;
@@ -196,21 +200,53 @@ function getDistance(int $quadSize, string $metric) {
     return $d;
 }
 
+/**
+ * Returns the quadrant size to use for a given size.
+ *
+ * @param int $quadSize
+ *   Size in miles or kilometers
+ *
+ * @param string $metric
+ *   m for miles or k for kilometers
+ *
+ * @return float
+ */
+function getDistance(int $quadSize, string $metric) {
+    $metricValues = array('m','k');
+    if (!in_array($metric, $metricValues)) {
+        $metric = 'k';
+    }
+
+
+    $startLatitude = 42.594434;
+    $startLongitude = 1.537490;
+
+    for ($i = 0; $i < 1; $i += 0.001) {
+        $finalLat = $startLatitude + ($i/2);
+        $finalLon = $startLongitude + ($i/2);
+        $distance = harvesine(
+            $metric,
+            $startLatitude,
+            $startLongitude,
+            $finalLat,
+            $finalLon);
+
+        if ($distance > $quadSize) {
+            break;
+        }
+    }
+
+    return $distance;
+}
+
 ```
 
 ### Harvesine Formula
-<p>
-x = Δλ ⋅ cos φ<sub>m</sub>
-y = Δφ
-d = R ⋅ √x² + y²
-</p>
-
 ```
 x = Δλ ⋅ cos φm
 y = Δφ
-d = R ⋅ √x² + y²
+d = R ⋅ √(x² + y²)
 ```
-
 Where **R** is the earth radius
 
 
