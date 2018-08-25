@@ -18,7 +18,7 @@ level, therefore it becomes an unusable solution, hence, not a solution.
 First than all, &quote;What are Quadtrees anyway?$quote; to put it simple, it's a
 data structure in a tree form, in which each level down represents a smaller space.
 
-!(img/680px-Quad_tree_bitmap.svg.png)
+![Quadtree Bitmap](img/680px-Quad_tree_bitmap.svg.png)
 
 Wikipedia offers the following definition:
 
@@ -28,7 +28,7 @@ Wikipedia offers the following definition:
 > it into four quadrants or regions. The data associated with a leaf cell varies
 > by application, but the leaf cell represents a "unit of interesting spatial information".
 
-![alt text](img/quad_tree.png "Wikipedia Quadtree")
+![Wikipedia Quadtree](img/quad_tree.png "Wikipedia Quadtree")
 [***Wikipedia - Quadtree***](https://en.wikipedia.org/wiki/Quadtree)
 
 # Quadtrees in action
@@ -40,12 +40,12 @@ all your points, you just need to define a bigger quadrant in which the search a
 given search will return the matching points.
 
 For example, this is my office location:
-!(img/locdb_me.png)
+![Where I am](img/locdb_me.png)
 
 If I want to have all the locations that are within a 10km radius, I can define
 a Quadrant that encapsulates them, that turns into:
 
-!(img/locdb_me_10k.png)
+![Quadtree of 10k](img/locdb_me_10k.png)
 
 
 
