@@ -45,7 +45,7 @@ For example, this is my office location:
 If I want to have all the locations that are within 10km from where I'am, I can define
 a Quadrant that encapsulates them, that turns into:
 
-![Quadtree of 10k](img/locdb_me_10k.png)
+![Quadtree of 10k](img/locdb_me_10_ak.png)
 
 
 # Show me the code
