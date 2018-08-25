@@ -139,7 +139,7 @@ $searchCentrePoint = new \QuadTrees\QuadTreeXYPoint($longitude, $latitude);
 //  Create the bounding box with specified dimensions
 $searchBoundingBox = new \QuadTrees\QuadTreeBoundingBox($searchCentrePoint, $width, $height);
 
-//  Search the cities QuadTree for all entries that fall within the defined bounding box
+//  Search the locations QuadTree for all entries that fall within the defined bounding box
 $searchResult = $citiesQuadTree->search($searchBoundingBox);
 ```
 
