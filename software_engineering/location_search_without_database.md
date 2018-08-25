@@ -15,7 +15,7 @@ because if you use Latituded and Longitud searches, their accuracy is at the cen
 level, therefore it becomes an unusable solution, hence, not a solution.
 
 # Quadtrees to the rescue
-First than all, &quote;What are Quadtrees anyway?$quote; to put it simple, it's a
+First than all, "What are Quadtrees anyway?" to put it simple, it's a
 data structure in a tree form, in which each level down represents a smaller space.
 
 ![Quadtree Bitmap](img/680px-Quad_tree_bitmap.svg.png)
