@@ -207,7 +207,7 @@ function harvesine(string $metric,
 }
 
 /**
- * Returns the quadrant size to use for a given size.
+ * Returns the quadrant width/height to use for a given distance and metric.
  *
  * @param int $quadSize
  *   Size in miles or kilometers
