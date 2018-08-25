@@ -259,7 +259,9 @@ x = Δλ ⋅ cos φm
 y = Δφ
 d = R ⋅ √(x² + y²)
 ```
-Where **R** is the earth radius
+Where **R** is the earth radius:
+* `3959` for miles
+* `6371` for kilometers
 
 
 
