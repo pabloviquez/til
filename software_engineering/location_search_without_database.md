@@ -42,12 +42,122 @@ given search will return the matching points.
 For example, this is my office location:
 ![Where I am](img/locdb_me.png)
 
-If I want to have all the locations that are within a 10km radius, I can define
+If I want to have all the locations that are within 10km from where I'am, I can define
 a Quadrant that encapsulates them, that turns into:
 
 ![Quadtree of 10k](img/locdb_me_10k.png)
 
 
+# Show me the code
+For the following example, I'm going to use Mark Baker Quadtree implementation (https://github.com/MarkBaker)
+
+## Location points
+
+Lets assume these locations are in file called ```locations.csv```
+```
+POSSIBLE,Avenida Escazu, 9.9384693,-84.1431671
+PFChangs,Avenida Escazu,9.9393797,-84.1422986
+Saga Desserts,Avenida Escazu,9.938567,-84.1431215
+Procomer,Plaza Tempo,9.9398292,-84.145805
+Milá Bistró, Plaza Tempo,9.940101,-84.145472
+Tintos y Blancos, Multiplaza,9.943562,-84.149817
+Subway,Parque La Sabana,9.932550,-84.103607
+Restaurante Prosperidad,Paseo Colón,9.935773,-84.094358
+El Steinvorth,San José,9.934282,-84.078206
+Trigo Miel,San José,9.934385,-84.077288
+Café Ruiseñor,San Pedro,9.932561,-84.059613
+Panes Artesanales Artemesia,La Paulina,9.940449,-84.051094
+Sabor Celestial,Sabanilla,9.946737,-84.037643
+Chef Sofía,Granadilla,9.931858,-84.026662
+Crêperie Crepissima,Tres Ríos,9.902207,-83.996396
+Winery ProAve,Cartago,9.891323,-83.941634
+Chocolate Shop, Cartago,9.883301,-83.933840
+```
+
+## Create location points
+
+Each location point will be encapsulated in a class with the respective data information:
+
+### LocationPoint Class
+```php
+class LocationPoint extends \QuadTrees\QuadTreeXYPoint
+{
+    public $name;
+    public $city;
+
+    public function __construct($name, $city, $x, $y) {
+        parent::__construct($x, $y);
+        $this->name = $name;
+        $this->city = $city;
+    }
+}
+```
+
+### Create base Quadtree
+```
+//  Set the centrepoint of our QuadTree at 0.0 Longitude, 0.0 Latitude
+$centrePoint = new \QuadTrees\QuadTreeXYPoint(0.0, 0.0);
+
+//  Set the bounding box to the entire globe
+$quadTreeBoundingBox = new \QuadTrees\QuadTreeBoundingBox($centrePoint, 360, 180);
+
+//  Create our QuadTree
+$quadTree = new \QuadTrees\QuadTree($quadTreeBoundingBox);
+```
+
+### Create individual locations
+```php
+$filename = 'locations.csv';
+$locationFile = new \SplFileObject($filename);
+$locationFile->setFlags(\SplFileObject::READ_CSV | \SplFileObject::DROP_NEW_LINE | \SplFileObject::SKIP_EMPTY);
+
+foreach($locationFile as $location) {
+    if (!empty($location[0])) {
+        $city = new LocationPoint(
+            $cityData[0],
+            $cityData[1],
+            $cityData[3],
+            $cityData[2]
+        );
+        $quadTree->insert($city);
+    }
+}
+```
+
+### Search
+```php
+$iamLatitude = 9.938162;
+$iamLongitude = -84.142934;
+
+// 10 km width/height box
+$width = 0.145;
+$height = 0.145;
+
+//  Create a bounding box to search in, centred on the specified longitude and latitude
+$searchCentrePoint = new \QuadTrees\QuadTreeXYPoint($longitude, $latitude);
+
+//  Create the bounding box with specified dimensions
+$searchBoundingBox = new \QuadTrees\QuadTreeBoundingBox($searchCentrePoint, $width, $height);
+
+//  Search the cities QuadTree for all entries that fall within the defined bounding box
+$searchResult = $citiesQuadTree->search($searchBoundingBox);
+```
+
+# Search Notes
+The search does require a small calculation for the box which is not a trivial task.
+
+Latitudes and longitudes have an accuracy depending on how many decimals they have:
+
+Lat/Long Decimal Points | Accuracy Miles | Accuracy KM
+--- | --- | ---
+33.0 | 111.32 km | 69.17 mi
+33.9 | 11.132 km | 6.917 mi
+33.97 | 1.1132 km | 0.6917 mi
+33.977 | 111.32 m | 365.19 feet
+33.9779 | 11.132 m | 36.519 fee
+33.97791 | 1.1132 m | 3.6519 feet
+33.977913 | 111.32 mm | 4.3826 inches
+33.9779134 | 11.132 mm | 0.4382 inches
 
 
 
@@ -55,3 +165,4 @@ a Quadrant that encapsulates them, that turns into:
 # References
 1. D’Angelo, A. 2016 A Brief Introduction to Quadtrees and Their Applications. Style file from the 28th Canadian Conference on Computational Geometry, 2016. 1-3.
 1. Wikipedia. Quadtrees. [https://en.wikipedia.org/wiki/Quadtree]. Accessed August 25th, 2018.
+1. Baker M. MarkBaker/QuadTrees [https://github.com/MarkBaker/QuadTrees]. Accesed August 25th, 2018.
