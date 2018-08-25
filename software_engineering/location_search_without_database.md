@@ -269,3 +269,4 @@ Where **R** is the earth radius:
 1. D’Angelo, A. 2016 A Brief Introduction to Quadtrees and Their Applications. Style file from the 28th Canadian Conference on Computational Geometry, 2016. 1-3.
 1. Wikipedia. Quadtrees. [https://en.wikipedia.org/wiki/Quadtree]. Accessed August 25th, 2018.
 1. Baker M. MarkBaker/QuadTrees [https://github.com/MarkBaker/QuadTrees]. Accesed August 25th, 2018.
+1. Wikipedia. Harvesine Formula. [https://en.wikipedia.org/wiki/Haversine_formula]. Accesed August 25th, 2018.
