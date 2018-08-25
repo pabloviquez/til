@@ -94,7 +94,7 @@ class LocationPoint extends \QuadTrees\QuadTreeXYPoint
 ```
 
 ### Create base Quadtree
-```
+```php
 //  Set the centrepoint of our QuadTree at 0.0 Longitude, 0.0 Latitude
 $centrePoint = new \QuadTrees\QuadTreeXYPoint(0.0, 0.0);
 
