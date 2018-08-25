@@ -239,6 +239,12 @@ function getDistance(int $quadSize, string $metric) {
     return $distance;
 }
 
+// Call it
+$distanceRequired = 10;
+$metric = 'k'; // KM
+
+$distance = getDistance($distanceRequired, $metric); // 0.145 for a 10.008460185606 KM box
+
 ```
 
 ### Harvesine Formula
