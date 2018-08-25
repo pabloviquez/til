@@ -5,9 +5,9 @@ When I started a new feature for a project I was working on, I needed to deliver
 via an API locations near the individual within a given range (5 miles).
 
 While we have systems like databases that can do this type of work easily, it
-does require a connection execute the query, wait for the results and then process
-them. While this process can be handle easily, when you add multiple users doing
-the same thing it can get a little problematic.
+does require a connection to execute the query, wait for the results and then process
+them. This process is easily, however, when you add multiple users doing the same
+thing it can get a little problematic.
 
 ## Caching the request
 Caching the request can be your first though, however, it can be a little complicated
