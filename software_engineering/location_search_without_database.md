@@ -223,7 +223,6 @@ function getDistance(int $quadSize, string $metric) {
         $metric = 'k';
     }
 
-
     $startLatitude = 42.594434;
     $startLongitude = 1.537490;
 
