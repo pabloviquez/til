@@ -11,12 +11,13 @@ I need to seach all nodes that matches field_abc_data_id with the string 'test'
 
 # 1. Search for the Node IDs (nid)
 ```php
+$storage = \Drupal::entityTypeManager()->getStorage('node');
 $query = \Drupal::entityQuery('node')
   ->condition('type', 'my_content_type')
   ->condition('field_abc_data_id', 'test');
 
 $nids = $query->execute();
-$nodes = $node_storage->loadMultiple($nids);
+$nodes = $storage->loadMultiple($nids);
 
 foreach ($nodes as $node) {
     echo "Node title: {$node->title->value}";
