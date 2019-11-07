@@ -69,6 +69,8 @@ mv ib_logfile0 ib_logfile0.bak
 mv ib_logfile1 ib_logfile1.bak
 ```
 
+Restart.
+
 ## Troubleshoot :: innodb_force_recovery 5
 
 Your undo log is broken.
