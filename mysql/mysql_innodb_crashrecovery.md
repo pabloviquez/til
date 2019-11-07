@@ -27,11 +27,11 @@ The innodb_force_recovery try to start MySQL in recovery mode, there's a catch t
 
 `innodb_force_recovery = 3` :: **3 (SRV_FORCE_NO_TRX_UNDO)** : Does not run transaction rollbacks after crash recovery.
 
-`innodb_force_recovery = 4` :: ⚠️ **4 (SRV_FORCE_NO_IBUF_MERGE)** : Prevents insert buffer merge operations. If they would cause a crash, does not do them. Does not calculate table statistics. This value can permanently corrupt data files. After using this value, be prepared to drop and recreate all secondary indexes. Sets InnoDB to read-only.
+`innodb_force_recovery = 4` :: ⚠️ **4 (SRV_FORCE_NO_IBUF_MERGE)** : Prevents insert buffer merge operations. If they would cause a crash, does not do them. Does not calculate table statistics. **This value can permanently corrupt data files**. 🚑After using this value, be prepared to drop and recreate all secondary indexes. Sets InnoDB to read-only.
 
-`innodb_force_recovery = 5` :: ⚠️ **5 (SRV_FORCE_NO_UNDO_LOG_SCAN)** : Does not look at undo logs when starting the database: InnoDB treats even incomplete transactions as committed. This value can permanently corrupt data files. Sets InnoDB to read-only.
+`innodb_force_recovery = 5` :: ⚠️ **5 (SRV_FORCE_NO_UNDO_LOG_SCAN)** : Does not look at undo logs when starting the database: InnoDB treats even incomplete transactions as committed. 🚑 **This value can permanently corrupt data files**. Sets InnoDB to read-only.
 
-`innodb_force_recovery = 6` :: ⚠️ **6 (SRV_FORCE_NO_LOG_REDO)** : Does not do the redo log roll-forward in connection with recovery. This value can permanently corrupt data files. Leaves database pages in an obsolete state, which in turn may introduce more corruption into B-trees and other database structures. Sets InnoDB to read-only.
+`innodb_force_recovery = 6` :: ⚠️ **6 (SRV_FORCE_NO_LOG_REDO)** : Does not do the redo log roll-forward in connection with recovery. 🚑 **This value can permanently corrupt data files**. Leaves database pages in an obsolete state, which in turn may introduce more corruption into B-trees and other database structures. Sets InnoDB to read-only.
 
 
 🆘  **TIP** 🆘 Start your DB at level ‼️  **1**, if it fails go for the next level.
