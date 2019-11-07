@@ -56,7 +56,7 @@ mysqlcheck -uroot -p -r BROKEN_DB BROKEN_TABLE
 ```
 
 
-## Problems - innodb_force_recovery 6
+## Troubleshoot :: innodb_force_recovery 6
 
 If you had to start the DB on recovery level 6, then your redo log has issues.
 
@@ -69,7 +69,7 @@ mv ib_logfile0 ib_logfile0.bak
 mv ib_logfile1 ib_logfile1.bak
 ```
 
-## Problems - innodb_force_recovery 5
+## Troubleshoot :: innodb_force_recovery 5
 
 Your undo log is broken.
 
@@ -81,7 +81,7 @@ mv ibdata1 ibdata1.bak
 Restart.
 
 
-## Problems - Unable to drop DB
+## Troubleshoot :: Unable to drop DB
 ibdata1
 In this case you need to drop the database manually / physically.
 
