@@ -50,10 +50,10 @@ functions:
 
 ```
 
-h1. Results
+# Results
 
-h2. Stage Default Configuration with custom Throttling
+## Stage Default Configuration with custom Throttling
 ![Stage default configuration](img/thorttling01.png)
 
-h2. Method with custom Throttling
+## Method with custom Throttling
 ![Hello world method with custom configuration](img/thorttling02.png)
