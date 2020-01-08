@@ -13,12 +13,6 @@ plugins:
   - serverless-api-gateway-throttling
 
 custom:
-  stage: ${opt:stage, self:provider.stage}
-  # ---------------------------
-  # --
-  # -- STAGE Default Throttling
-  # --
-  # ---------------------------
   apiGatewayThrottling:
     maxRequestsPerSecond: 2
     maxConcurrentRequests: 1
@@ -55,3 +49,11 @@ functions:
           cors: true
 
 ```
+
+h1. Results
+
+h2. Stage Default Configuration with custom Throttling
+![Stage default configuration](img/thorttling01.png)
+
+h2. Method with custom Throttling
+![Hello world method with custom configuration](img/thorttling02.png)
