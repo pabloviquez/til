@@ -8,6 +8,25 @@ So this: ```domain``` is wrong.
 
 The valid one: ```somename.com``` or ```mysubdomain.domain.com```
 
+### Invalid Example
+```
+CloudFrontDistribuition:
+  Type: AWS::CloudFront::Distribution
+  Properties:
+      Aliases:
+        - !Sub "yarayara"
+```
+
+### Valid Example
+```
+CloudFrontDistribuition:
+  Type: AWS::CloudFront::Distribution
+  Properties:
+      Aliases:
+        - !Sub "yarayara.domain.com"
+```
+
+
 ## Exactly one of [AcmCertificateArn,CloudFrontDefaultCertificate,IamCertificateId] needs to be specified
 
 WTF?! basically ony one in the section ```Properties.ViewerCertificate```
