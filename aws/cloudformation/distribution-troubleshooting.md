@@ -4,6 +4,10 @@
 
 This refers to ```Properties.DistributionConfig.Aliases```. The alias must be a valid *lowercase* domain.
 
+So this: ```domain``` is wrong.
+
+The valid one: ```somename.com``` or ```mysubdomain.domain.com```
+
 ## Exactly one of [AcmCertificateArn,CloudFrontDefaultCertificate,IamCertificateId] needs to be specified
 
 WTF?! basically ony one in the section ```Properties.ViewerCertificate```
