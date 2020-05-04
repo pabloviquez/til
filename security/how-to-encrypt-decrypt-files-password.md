@@ -7,7 +7,7 @@ openssl des3 -salt -in file.tar.gz -out file.tar.gz.enc
 
 ## Decrypt, DES3
 ```
-openssl des3 -d -salt -in file.tar.gz -out file.tar
+openssl des3 -d -salt -in file.tar.gz.enc -out file.tar
 ```
 
 
