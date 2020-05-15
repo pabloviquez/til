@@ -72,6 +72,11 @@ docker logs ${MYCONTAINERNAME} 2>&1 | grep GENERATED
 docker logs ${MYCONTAINERNAME}
 ```
 
+## SSH into the container
+```
+docker exec -it ${MYCONTAINERNAME} bash 
+```
+
 ## How to use the MySQL client
 
 ```
