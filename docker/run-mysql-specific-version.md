@@ -4,7 +4,7 @@ Well we can use Docker for that!
 
 First, what version do you want/neeed?
 
-Go to: https://hub.docker.com/_/mysql?tab=tags and search for the version required, and copy the ```docker pull``` command. For the sake of this example, I will use MySQL 5.7.22.
+Go to: https://hub.docker.com/_/mysql?tab=tags search for the version required, and copy the ```docker pull``` command. For the sake of this example, I will use MySQL 5.7.22.
 
 ![Docker MySQL 5.7.22 Image Example](img/docker_tag_mysql.png "Docker MySQL 5.7.22 Image Example")
 
