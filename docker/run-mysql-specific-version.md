@@ -52,7 +52,7 @@ The DB is also forwarding the port 3306 to the localhost port 33306.
 
 # Tricks / How to's
 
-## How do I use a brand new DB without pre-exiting content?
+## How do I use a brand new DB without pre-existing content?
 ```
 cd mysqldata
 rm -Rf *
