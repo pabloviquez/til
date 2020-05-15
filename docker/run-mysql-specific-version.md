@@ -46,6 +46,8 @@ docker run -d \
   mysql/mysql-server:5.7.22
 ```
 
+It will create two volumens that will remain after the container is shutdown. In this case, one volumen will have all the MySQL actual data and the other it's just a directory to share stuff, like scripts or whatever you want to have accesible in the server.
+
 The DB is also forwarding the port 3306 to the localhost port 33306.
 
 # Tricks / How to's
