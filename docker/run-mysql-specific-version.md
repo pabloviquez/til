@@ -28,6 +28,7 @@ MYCONTAINERNAME="mycontainer"
 docker run -d \
   --name=${MYCONTAINERNAME} 
   -d -p 33306:3306 \
+  --character-set-server=utf8mb4 \
   mysql/mysql-server:5.7.22
 ```
 
@@ -40,6 +41,7 @@ MYCONTAINERNAME="mycontainer"
 CURRENTDIR=$(pwd)
 docker run -d \
   --name=${MYCONTAINERNAME} \
+  --character-set-server=utf8mb4 \
   -v ${CURRENTDIR}/mysqldata:/var/lib/mysql \
   -v ${CURRENTDIR}/share:/var/shared \
   -d -p 33306:3306 \
