@@ -11,7 +11,7 @@ sudo bash renew.sh
 ## Script
 
 **File: renew.sh**
-```
+```bash
 # -----------------------------------------------------------------------------
 # -- OpenVPN SSL Certificate Renewal
 # --
@@ -62,4 +62,15 @@ echo "Installing certificate"
 echo "Restarting OpenVPN"
 ./sacli start
 
+```
+
+## Set it on Schedule
+
+If you want to have an automatic schedule to update the cert automatically, you could run a CronJob:
+
+```
+# Open VPN Cert Renewal
+# Every 1st of Feb/May/Aug/Nov at 15:00
+# Min  Hour   Day   Month     DayWeek  Command
+0      15     1     2,5,8,11  *        /bin/bash /root/renewcert.sh >> /tmp/cert-renewal.log 2>&1
 ```
