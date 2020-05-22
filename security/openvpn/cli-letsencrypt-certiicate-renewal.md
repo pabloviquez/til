@@ -12,6 +12,7 @@ sudo bash renew.sh
 
 **File: renewcert.sh**
 ```bash
+#!/bin/bash
 # -----------------------------------------------------------------------------
 # -- OpenVPN SSL Certificate Renewal
 # --
