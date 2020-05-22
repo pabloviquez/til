@@ -64,7 +64,7 @@ echo "Restarting OpenVPN"
 
 ```
 
-## Set it on Schedule
+## Renew and Install Certificate Automatically
 
 If you want to have an automatic schedule to update the cert automatically, you could run a CronJob:
 
