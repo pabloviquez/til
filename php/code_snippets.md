@@ -4,7 +4,7 @@
 
 ### DEBUG_LOG
 
-**Description: **  DEBUG - Print to PHP error log
+**Description**:  DEBUG - Print to PHP error log
 
 #### Zend Studio
 ```php
