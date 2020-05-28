@@ -1,12 +1,44 @@
-# Code Snippets
+# Debugging Snippets
 
-## Debugging Snippets
+## DEBUG_PHP
 
-### DEBUG_LOG
+**Description**:  DEBUG - Outputs and exit
+
+### Zend Studio
+```
+// DEBUG - START
+echo "\n<pre>\n";
+echo __FILE__ . '::' . __METHOD__ . '(' . __LINE__ . ")\n";
+var_dump(${VAR_TO_DEBUG});
+echo "\n</pre>\n";
+exit;
+// DEBUG - END
+
+```
+
+### Visual Studio
+```
+  "DEBUG_PHP": {
+    "prefix": "DEBUG_PHP",
+    "body": [
+      "// DEBUG - START",
+      "echo \"\n<pre>\n\";",
+      "echo __FILE__ . '::' . __METHOD__ . '(' . __LINE__ . \")\n\";",
+      "var_dump(${VAR_TO_DEBUG});",
+      "echo \"\n</pre>\n\";",
+      "exit;",
+      "// DEBUG - END"
+    ],
+    "description": "DEBUG - Prints and exit"
+  }
+```
+
+
+## DEBUG_LOG
 
 **Description**:  DEBUG - Print to PHP error log
 
-#### Zend Studio
+### Zend Studio
 ```php
 // DEBUG - START
 error_log(__CLASS__ . '::' . __FUNCTION__ . '(' . __LINE__ . ')');
