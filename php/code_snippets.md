@@ -8,7 +8,7 @@ Name | Zend Studio | Visual Studio
 `DEBUG_LOG` | ```// DEBUG - START
 error_log(__CLASS__ . '::' . __FUNCTION__ . '(' . __LINE__ . ')');
 error_log('${TXT_VAR_TO_DEBUG} ' . print_r(${VAR_TO_DEBUG}, true));
-// DEBUG - END``` | ```php
+// DEBUG - END``` | `php
 "DEBUG_LOG": {
     "prefix": "DEBUG_LOG",
     "body": [
@@ -18,5 +18,5 @@ error_log('${TXT_VAR_TO_DEBUG} ' . print_r(${VAR_TO_DEBUG}, true));
       "// DEBUG - END"
     ],
     "description": "DEBUG - Print to PHP error log"
-  } ```
+  }`
 
