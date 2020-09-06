@@ -5,7 +5,7 @@ Let's say you have JMeter writing to a file.
 1. Add a JSR223 Sample
 2. Set language to javascript
 
-## Exmple
+## Example
 ```
 var outfile = "./log_file.txt";
 var logs = array(
@@ -31,4 +31,4 @@ writer.close()
 ## Reference
 For all the possible methods you can use, go to: https://docs.oracle.com/javase/7/docs/api/java/io/PrintWriter.html
 
-[Example JMeter plan!](./plans/LogFileWritter.jmx)
+[Download :: JMeter plan Example](./plans/LogFileWritter.jmx)
