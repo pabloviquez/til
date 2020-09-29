@@ -18,9 +18,9 @@ SELECT id,alias,status FROM path_alias WHERE path like '/node/123456'
 ```
 
 # Why is redirecting?
-Basically, internally, when a inboud processor kicks in, initially recives the original request, let's say: ```/aura-cacia-gray-matter-batter-essential-oil0-5-fl-oz``` however, at some point this URL gets translated into the node URL: ```/node/123456```.
+Basically, internally, when a inboud process kicks in, initially receives the original request, let's say: ```/aura-cacia-gray-matter-batter-essential-oil0-5-fl-oz``` however, at some point this URL gets translated into the node URL: ```/node/123456```.
 
-At this point, one module will query ```Drupal\path_alias\AliasManager``` for the path alias for the URL and this is where the redirection may happen. Basically because it will return the first path matching the node.
+It's here that, when the RouteNormalizerRequestSubscriber process queries ```Drupal\path_alias\AliasManager``` for the path alias of the URL, the result may be different from the current URL and this is where the redirection happens.
 
 ## DEBUG :: Where does the redirect happens?
 
