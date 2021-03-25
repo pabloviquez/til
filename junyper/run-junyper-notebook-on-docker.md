@@ -27,7 +27,6 @@ To use Junyper as a Docker image, is quite simple, the hardest thing is to pick 
 * jupyter/datascience-notebook
 * jupyter/datascience-notebook
 * jupyter/pyspark-notebook
-* jupyter/pyspark-notebook
 * jupyter/all-spark-notebook
 * jupyter/all-spark-notebook
 
@@ -35,5 +34,35 @@ For more info: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/sele
 
 This diagram makes it easy to understand:
 ![Image Relationships](./img/images_docker.png)
+
+**For the sake of this demo, I will pick {{jupyter/scipy-notebook}}**
+
+## Docker File
+Save the following in a clean directory, where you will save your projects:
+```
+version: "3.7"
+
+services:
+  junyper:
+    image: jupyter/scipy-notebook:latest
+    container_name: jupyter
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    networks:
+      - junyper-local
+    environment:
+      - .jupyter-env
+    volumes:
+      - ./home:/home/jovyan
+
+networks:
+  junyper-local:
+    driver: bridge
+
+```
+
+Once saved, **create** a new directory called: `home`
+![Directory Structure](./img/directory.png)
 
 
