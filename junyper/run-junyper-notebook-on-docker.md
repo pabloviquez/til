@@ -34,6 +34,6 @@ To use Junyper as a Docker image, is quite simple, the hardest thing is to pick 
 For more info: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#core-stacks
 
 This diagram makes it easy to understand:
-![Image Relationships](./img/blockdiag.svg)
+![Image Relationships](./img/blockdiag.png)
 
 
