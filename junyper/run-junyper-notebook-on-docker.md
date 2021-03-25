@@ -81,6 +81,12 @@ docker-compose up -d
 docker-compose logs junyper |grep '127.0.0.1:8888' |grep 'token' |head -1
 ```
 
+Or list all the logs:
+```
+docker-compose logs junyper
+```
+
+
 ### Stop the container
 ```
 docker-compose stop
