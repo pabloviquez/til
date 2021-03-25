@@ -35,7 +35,7 @@ For more info: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/sele
 This diagram makes it easy to understand:
 ![Image Relationships](./img/images_docker.png)
 
-**For the sake of this demo, I will pick {{jupyter/scipy-notebook}}**
+**For the sake of this demo, I will pick `jupyter/scipy-notebook`**
 
 ## Docker File
 Save the following in a clean directory, where you will save your projects:
