@@ -40,7 +40,7 @@ This diagram makes it easy to understand:
 ## Docker File
 Save the following in a clean directory, where you will save your projects:
 ```
-version: "3.7"
+version: "3.9"
 
 services:
   junyper:
@@ -51,8 +51,6 @@ services:
       - "8888:8888"
     networks:
       - junyper-local
-    environment:
-      - .jupyter-env
     volumes:
       - ./home:/home/jovyan
 
@@ -66,3 +64,40 @@ Once saved, **create** a new directory called: `home`
 ![Directory Structure](./img/directory.png)
 
 
+## Run it!
+
+At the command line run:
+
+```
+docker-compose up -d
+```
+
+## Tips & Other Commands
+
+[Compose command-line reference](https://docs.docker.com/compose/reference/)
+
+### How to see the token?
+```
+docker-compose logs junyper |grep '127.0.0.1:8888' |grep 'token' |head -1
+```
+
+### Stop the container
+```
+docker-compose stop
+```
+
+### Remove container completly
+```
+docker-compose stop
+docker-compose rm -f
+```
+### List running containers
+
+**List running compose projects**
+```
+docker-compose ls
+```
+**List Containers**
+```
+docker-compose ps
+```
