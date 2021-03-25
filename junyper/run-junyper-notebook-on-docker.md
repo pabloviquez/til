@@ -35,5 +35,5 @@ For more info: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/sele
 
 This diagram makes it easy to understand:
 ![Image Relationships](./img/blockdiag.png)
-
+![Image Relationships](./img/blockdiag.png)
 
