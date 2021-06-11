@@ -22,11 +22,11 @@ This setup assumes the following:
 ### 1.1. Network Ports
 For a default JMeter setup, it's required for the machines to talk to each other using the following network rules:
 
-Name | Port | Protocol | Source | Destination | Action
---- | --- | --- | --- | --- | --- | ---
-IncomingJmeter | `1099` | `tcp` | *SubNet* | *SubNet* | `Allow`
-SSHOptional | `22` | `tcp` | *SubNet* | *SubNet* | `Allow`
-OutgoingJmeter | `1024-65536` | `tcp` | *SubNet* | *SubNet* | `Allow`
+| Name | Port | Protocol | Source | Destination | Action |
+| --- | --- | --- | --- | --- | --- | --- |
+| IncomingJmeter | `1099` | `tcp` | *SubNet* | *SubNet* | `Allow` |
+| SSHOptional | `22` | `tcp` | *SubNet* | *SubNet* | `Allow` |
+| OutgoingJmeter | `1024-65536` | `tcp` | *SubNet* | *SubNet* | `Allow` |
 
 ### 1.2. Java RMI Setup
 JMeter uses by default Java Remote Method Invocation (Java RMI) to make remote invocations over secure SSL connections.
