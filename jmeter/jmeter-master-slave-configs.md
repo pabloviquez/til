@@ -29,8 +29,38 @@ IncomingJmeter | `1099` | `tcp` | *SubNet* | *SubNet* | `Allow`
 SSHOptional | `22` | `tcp` | *SubNet* | *SubNet* | `Allow`
 OutgoingJmeter | `1024-65536` | `tcp` | *SubNet* | *SubNet* | `Allow`
 
+### 1.1. Servers Setup - Java & Network Tools
+```
+sudo apt-get udpate && \
+sudo apt-get install nmap -y && \
+sudo apt install net-tools -y && \
+sudo apt install default-jre -y
+```
 
-### 1.2. Java RMI Setup
+### 1.2. Servers Setup - JMeter Setup
+**Using JMeter 5.4.1**
+
+```
+cd ~
+wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.1.tgz
+tar -xzvf apache-jmeter-5.4.1.tgz
+```
+
+### 1.3. Create/Append to bash profile for easy access
+
+Run the following commands to create a `.bash_profile` with some helpers already on it.
+
+```
+cd ~
+cd apache-jmeter-5.4.1
+_JPATH=$(pwd)
+echo "export JMETER_HOME=\"${_JPATH}\"" >> ~/.bash_profile
+echo "export PATH=\"${PATH}:${JMETER_HOME}/bin\"" >> ~/.bash_profile
+echo "alias INIT_SERVER=\"clear && cd ~/loadtest/ && bash ${JMETER_HOME}/bin/jmeter-server\"" >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+### 1.4. Java RMI Setup
 JMeter uses by default Java Remote Method Invocation (Java RMI) to make remote invocations over secure SSL connections.
 
 **Hack**
@@ -59,37 +89,6 @@ Is CN=My LoadTest, OU=IT, O=PabloViquez.com, L=San Jose, ST=San Jose, C=CR corre
 
 ![ JMeter Slave Running Example ](img/rmi_cert.png)
 
-### 1.3. Servers Setup - Java & Network Tools
-```
-sudo apt-get udpate && \
-sudo apt-get install nmap -y && \
-sudo apt install net-tools -y && \
-sudo apt install default-jre -y
-```
-
-### 1.3. Servers Setup - JMeter Setup
-**Using JMeter 5.4.1**
-
-```
-cd ~
-wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.1.tgz
-tar -xzvf apache-jmeter-5.4.1.tgz
-```
-
-
-### 1.4. Create/Append to bash profile for easy access
-
-Run the following commands to create a `.bash_profile` with some helpers already on it.
-
-```
-cd ~
-cd apache-jmeter-5.4.1
-_JPATH=$(pwd)
-echo "export JMETER_HOME=\"${_JPATH}\"" >> ~/.bash_profile
-echo "export PATH=\"${PATH}:${JMETER_HOME}/bin\"" >> ~/.bash_profile
-echo "alias INIT_SERVER=\"clear && cd ~/loadtest/ && bash ${JMETER_HOME}/bin/jmeter-server\"" >> ~/.bash_profile
-source ~/.bash_profile
-```
 
 ## 2. Run
 To run the test using master/slave do:
