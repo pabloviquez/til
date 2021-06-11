@@ -237,7 +237,7 @@ function pause()
 clear
 
 echo "----------------------------------------------------"
-echo "-- JMeter Distributed Excecutor Tool"
+echo "-- JMeter Distributed Executor Tool"
 echo "--"
 echo "--"
 echo "-- @author Pablo Viquez <pviquez@pabloviquez.com>"
