@@ -16,6 +16,7 @@ This setup assumes the following:
 1. Servers can talk to each other.
 1. Servers are in the same subnet.
 1. Ubuntu is used as OS in the servers.
+1. Subnet is isolated, no other hosts (only JMeter) are running inside.
 
 ## 1. Setup
 
@@ -27,6 +28,7 @@ Name | Port | Protocol | Source | Destination | Action
 IncomingJmeter | `1099` | `tcp` | *SubNet* | *SubNet* | `Allow`
 SSHOptional | `22` | `tcp` | *SubNet* | *SubNet* | `Allow`
 OutgoingJmeter | `1024-65536` | `tcp` | *SubNet* | *SubNet* | `Allow`
+
 
 ### 1.2. Java RMI Setup
 JMeter uses by default Java Remote Method Invocation (Java RMI) to make remote invocations over secure SSL connections.
