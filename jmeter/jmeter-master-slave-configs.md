@@ -37,8 +37,8 @@ raw Markdown line up prettily. You can also use inline Markdown.
 
 Name | Port | Protocol | Source | Destination | Action
 --- | --- | --- | --- | --- | ---
-IncomingJmeter | `1099` | `tcp` | *SubNet* | *SubNet* | `Allow
-1 | 2 | 3
+IncomingJmeter | `1099` | `tcp` | *SubNet* | *SubNet* | `Allow`
+SSHOptional | `22` | `tcp` | *SubNet* | *SubNet* | `Allow`
 
 
 
