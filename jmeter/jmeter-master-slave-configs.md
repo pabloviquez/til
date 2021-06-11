@@ -76,11 +76,10 @@ wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.1.tgz
 tar -xzvf apache-jmeter-5.4.1.tgz
 ```
 
-### 1.4. Create/Append to bash profile for easy access
-export JMETER_HOME="/home/pviquez/apache-jmeter-5.4.1"
-export PATH="${PATH}:${JMETER_HOME}/bin"
 
-alias INIT_SERVER="clear && cd ~/loadtest/ && bash ${JMETER_HOME}/bin/jmeter-server"
+### 1.4. Create/Append to bash profile for easy access
+
+Run the following commands to create a `.bash_profile` with some helpers already on it.
 
 ```
 cd ~
