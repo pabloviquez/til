@@ -46,8 +46,6 @@ Automatically will create a new screen called "myxyz" with 2 screens on it.
 
 If you're lazy and dont want to kill screen by screen, kill it as follow:
 
-##. How to kill a Screen Session
-
 ### How many Screen sessions do I have running?
 
 ```bash
@@ -57,6 +55,13 @@ There are screens on:
     15967.myxyz (Multi, detached)
 1 Socket in /var/folders/cv/p402vycd0b3g5hy2mk66p1b5lfrh0b/T/.screen.
 ```
+
+### How to attach or return to a previous screen session?
+Using screen list from previous step.
+```bash
+> screen -r -d 15967.myxyz
+```
+
 
 ### Quit / Kill one screen session
 
