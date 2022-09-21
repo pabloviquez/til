@@ -9,7 +9,7 @@ Normally, this types of cases will happen in the `.install` file.
 * Module name: MyMod
 * Install file name: `mymod.install`
 
-```
+```php
 /**
  * Reads, parses and process configuration files.
  *
