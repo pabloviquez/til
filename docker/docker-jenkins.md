@@ -45,14 +45,20 @@ services:
       - "50000:50000"
     volumes:
       - data:/var/jenkins_home
+    environment:
+      - JAVA_OPTS=-Dhudson.footerURL=http://localhost:8080
 volumes:
   data:
-    external: true
+#
+# Alternative
+#  data:
+#    external: true
 ```
-
 > **external: true** Specifies that this volume already exist on the platform and its lifecycle
 > is managed outside of that of the application. Compose implementations MUST NOT attempt to
 > create these volumes, and MUST return an error if they do not exist.
+>
+> IF external is marked as true, the volume needs to be created first, before the first run.
 
 
 # Docker Compose Commands
