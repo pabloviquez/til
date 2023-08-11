@@ -27,7 +27,7 @@ brew link --overwrite --force shivammathur/php/php@8.2
 Open`~/.bash_profile` and add the following aliases:
 
 ```bash
-alias php_7.4='{ brew unlink php; brew link --overwrite --force shivammathur/php/php@7.4; } &> /dev/null &&  echo "Local PHP version changed to:"; php -v'
+alias php_7.4='{ brew unlink php; brew link --overwrite --force php@7.4; } &> /dev/null && echo "Local PHP version changed to:"; php -v'
 alias php_8.1='{ brew unlink php; brew link --overwrite --force php@8.1; } &> /dev/null && echo "Local PHP version changed to:"; php -v'
 alias php_8.2='{ brew unlink php; brew link --overwrite --force php@8.2; } &> /dev/null && echo "Local PHP version changed to:"; php -v'
 ```
