@@ -119,3 +119,21 @@ box-sizing:border-box</ac:parameter>
   </ac:rich-text-body>
 </ac:structured-macro>
 ```
+
+
+# Fancy Boxes
+
+
+## Colorful Box
+![Fancy Box - Colorful](img/fancy_box_colorful.png)
+```
+<ac:structured-macro
+  ac:name="divbox"
+  ac:schema-version="1">
+  <ac:parameter
+    ac:name="style">font-family: Arial;font-size: 1.5rem;padding: 1em;padding-right:20%;width: 100%;min-height:100px;box-sizing: border-box;border-radius: .25rem;background-color: #e4e4d9;background-image: linear-gradient(175deg, rgb(0 0 0 / 0%) 95%, #8da389 95%),linear-gradient( 85deg, rgb(0 0 0 / 0%) 95%, #8da389 95%),linear-gradient(175deg, rgb(0 0 0 / 0%) 90%, #b4b07f 90%),linear-gradient( 85deg, rgb(0 0 0 / 0%) 92%, #b4b07f 92%),linear-gradient(175deg, rgb(0 0 0 / 0%) 85%, #c5a68e 85%),linear-gradient( 85deg, rgb(0 0 0 / 0%) 89%, #c5a68e 89%),linear-gradient(175deg, rgb(0 0 0 / 0%) 80%, #ba9499 80%),linear-gradient( 85deg, rgb(0 0 0 / 0%) 86%, #ba9499 86%),linear-gradient(175deg, rgb(0 0 0 / 0%) 75%, #9f8fa4 75%),linear-gradient( 85deg, rgb(0 0 0 / 0%) 83%, #9f8fa4 83%),linear-gradient(175deg, rgb(0 0 0 / 0%) 70%, #74a6ae 70%),linear-gradient( 85deg, rgb(0 0 0 / 0%) 80%, #74a6ae 80%);</ac:parameter>
+  <ac:rich-text-body>
+    <p><strong>The quick brown fox jumps over the lazy dog.</strong> Pack my box with five dozen liquor jugs..</p>
+  </ac:rich-text-body>
+</ac:structured-macro>
+```
