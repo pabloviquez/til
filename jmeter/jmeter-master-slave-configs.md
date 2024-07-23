@@ -31,19 +31,19 @@ OutgoingJmeter | `1024-65536` | `tcp` | *SubNet* | *SubNet* | `Allow`
 
 ### 1.1. Servers Setup - Java & Network Tools
 ```
-sudo apt-get udpate && \
+sudo apt-get update && \
 sudo apt-get install nmap -y && \
 sudo apt install net-tools -y && \
 sudo apt install default-jre -y
 ```
 
 ### 1.2. Servers Setup - JMeter Setup
-**Using JMeter 5.4.1**
+**Using JMeter 5.6.3**
 
 ```
 cd ~
-wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.1.tgz
-tar -xzvf apache-jmeter-5.4.1.tgz
+wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+tar -xzvf apache-jmeter-5.6.3.tgz
 ```
 
 ### 1.3. Create/Append to bash profile for easy access
@@ -52,7 +52,7 @@ Run the following commands to create a `.bash_profile` with some helpers already
 
 ```
 cd ~
-cd apache-jmeter-5.4.1
+cd apache-jmeter-5.6.3
 _JPATH=$(pwd)
 echo "export JMETER_HOME=\"${_JPATH}\"" >> ~/.bash_profile
 echo "export PATH=\"${PATH}:${JMETER_HOME}/bin\"" >> ~/.bash_profile
@@ -69,8 +69,8 @@ JMeter has a tool to generate the required `rmi_keystore.jks` file.
 The tool name is: `create-rmi-keystore.sh` inside the Jmeter bin directory.
 
 ```
-cd ~/apache-jmeter-5.4.1/bin
-~/apache-jmeter-5.4.1/bin$ bash create-rmi-keystore.sh
+cd ~/apache-jmeter-5.6.3/bin
+~/apache-jmeter-5.6.3/bin$ bash create-rmi-keystore.sh
 What is your first and last name?
   [Unknown]:  MyJMeterTest
 What is the name of your organizational unit?
