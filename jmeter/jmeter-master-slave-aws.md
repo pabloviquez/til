@@ -1,19 +1,65 @@
 # Jmeter Master Slave Configuration in AWS
 
-## Context & Setup
- |
-This "how to" is based on the [Jmeter Master Slave Configuration](jmeter-master-slave-configs.md) with a few differences:
+## Summary
+This is a CloudFormation Recipe to setup a JMeter load test environment. It's based on the configuration described here: [Jmeter Master Slave Configuration](jmeter-master-slave-configs.md) with a few differences.
 
-* 1x Server as Master
-* 3x Servers as Slaves
+The Cloud Formation script creates the following resorces:
 
-All servers running Amazon Linux (Debian), on t3.xlarge machines with the  following specs:
-* Enabled Public IP
-* JMeter traffic permitted for all four machines.
+* 1x VPC
+* 4x EC2 Instances
+* 1x Internet Gateway
+* 1x Route table
+* 2x Security Groups (Default VPC and EC2 security group).
+* Traffic restrictions for the EC2 instances to communicate with each other.
+
+## VPC & Subnets
+The reason why I'm using a custom VPC is because the AWS default  is too big, each subnet supports `4091` hosts, and when I run a host scanner takes too much time.
+
+The Load Test VPC created has the following specs:
+* **IPv4 CIDR** `192.168.0.0/26`
+* **Public IP** `Enabled`
+* **Zone** `us-east-2`
+* **Subnets** `3`
+* **DNS hostname resolution** `Enabled`
+* **DNS resolution** `Enabled`
+
+### Subnets
+The subnet information goes as follow:
+
+Subnet name | IPv4CIDR | Max Hosts | Availability Zone | Start IP | End IP |
+--- | --- | --- | --- | --- | ---
+`Zone2A-LT-1` | `192.168.0.0/28` | `11` | `us-east-2a` | `192.168.0.1` | `192.168.0.15`
+`Zone2B-LT-2` | `192.168.0.16/28` | `11` | `us-east-2a` | `192.168.0.17` | `192.168.0.31`
+`Zone2C-LT-3` | `192.168.0.32/28` | `11` | `us-east-2a` | `192.168.0.33` | `192.168.0.47`
+
+
+## Security Group Configuration
+The following rules are created:
+
+Rule Name | Port | Protocol | Source | Destination | Action
+--- | --- | --- | --- | --- | ---
+IngressRuleJmeter | `1099` | `tcp` | *SecurityGroup* | *SecurityGroup* | `Allow`
+IngressRuleJmeterStop | `4445` | `tcp` | *SecurityGroup* | *SecurityGroup* | `Allow`
+IngressNmapScan80 | `80` | `tcp` | *SuSecurityGroupbNet* | *SecurityGroup* | `Allow`
+IngressNmapScan443 | `443` | `tcp` | *SecurityGroup* | *SecurityGroup* | `Allow`
+IngressNmapScanIcmp | `all` | `ICMP` | *SecurityGroup* | *SecurityGroup* | `Allow`
+IngressSSHInternal | `22` | `tcp` | *SecurityGroup* | *SecurityGroup* | `Allow`
+IngressSSHExternal | `22` | `tcp` | `ParamExternalIP` | *SecurityGroup* | `Allow`
+OutTraffic (Default) | `1024-65536` | `tcp` | *SecurityGroup* | *SecurityGroup* | `Allow`
+
+### Note - NMap
+To discover the host in the subnet, `nmap` no port scan is used `nmap -sn`.
+This command discovers hosts by sending an ICMP echo request, TCP SYN to port 443, TCP ACK to port 80, and an ICMP timestamp request by default.
+
+For the sake of simplicity, all ICMP traffic is allowed.
+
+### Note - IngressSSHInternal
+The rule uses a parameter that needs to be replace by the external IP allowed to access the servers.
 
 
 ## AWS AMI
-At the moment of writting this doc, the latest AWS AMI available was ``Amazon Linux 2023 AMI 2023.5.20240708.0 x86_64 HVM kernel-6.1``
+
+At the moment of writting this doc (2024-07-25), the latest AWS AMI available was ``Amazon Linux 2023 AMI 2023.5.20240708.0 x86_64 HVM kernel-6.1``
 
 The AMI ID used is: ``ami-0649bea3443ede307``
 
@@ -22,23 +68,20 @@ For more information on AWS AMIs, go to: https://docs.aws.amazon.com/linux/
 ## AWS Cloud Formation Script
 
 ### Parameters To Replace
-Param Name | Description
---- | ---
-ParamVPCID | VPC ID to use.
-ParamSubNetID1 | Subnet ID, will be assigned to master and slave 1.
-ParamSubNetID2 | Subnet ID, will be assigned to slave 2.
-ParamSubNetID3 | Subnet ID, will be assigned to slave 3
-ParamAmiID | AMI Image ID
-ParamInstanceType | Type of instance, this example has t3.xlarge
-ParamEC2KeyName | PEM Name. Should be created before this Cloud Formation is executed.
-ParamCreationDate | Date, normally with the format YYYYMMDD, for tagging pourpurses.
-ParamEC2UserData | Script to execute when instances are created.
+Param Name | Description | Default Value
+--- | --- | ---
+ParamExternalIP | External public IP address use to connect to the servers. | `8.8.8.8/32`
+ParamAmiID | AMI Image ID | `ami-0649bea3443ede307`
+ParamInstanceType | Type of instance | `t3.xlarge`
+ParamEC2KeyName | PEM Name. Should be created before this Cloud Formation is executed. | `No value provided`
+ParamCreationDate | Date, normally with the format YYYYMMDD, for tagging pourpurses. | `20240525`
+ParamEC2UserData | Script to execute when instances are created. | `Steps to download and install Jmeter in each machine`
 
 ### Cloud Formation File
 
 ```
 # Cloud Formation File
-# Last update: 2024-07-24
+# Last update: 2024-07-25
 #
 # Update the parameters acordingly.
 
@@ -46,22 +89,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: 'AWS CloudFormation load testing configuration.'
 
 Parameters:
-  ParamVPCID:
-    Description: VPC ID to use.
+  ParamExternalIP:
+    Description: External public IP address use to connect to the servers.
     Type: String
-    Default: <VPC ID HERE>
-  ParamSubNetID1:
-    Description: Subnet ID 1 to use.
-    Type: String
-    Default: <SUB NET 1 ID here, like subnet-1234567897123>
-  ParamSubNetID2:
-    Description: Subnet ID 2 to use.
-    Type: String
-    Default: <SUB NET 2 ID here, like subnet-1234567897123>
-  ParamSubNetID3:
-    Description: Subnet ID 3 to use.
-    Type: String
-    Default: <SUB NET 3 ID here, like subnet-1234567897123>
+    Default: 8.8.8.8/32
   ParamAmiID:
     Description: AMI ID to use.
     Type: String
@@ -77,7 +108,7 @@ Parameters:
   ParamCreationDate:
     Description: Creation date of the stack.
     Type: String
-    Default: 20230724
+    Default: 20230725
   ParamEC2UserData:
     Description: EC2 user data.
     Type: String
@@ -115,13 +146,121 @@ Parameters:
           echo "export JMETER_HOME=\"$(pwd)\"" >> /home/ec2-user/.bash_profile
           echo "export PATH=\"${PATH}:${JMETER_HOME}/bin\"" >> ~/.bash_profile
           echo "alias INIT_SERVER=\"clear && cd ~/loadtest/ && bash ${JMETER_HOME}/bin/jmeter-server\"" >> ~/.bash_profile
+
 Resources:
+  LoadTestVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 192.168.0.0/26
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value: VPC-LoadTest
+      - Key: CREATED
+        Value: !Ref ParamCreationDate
+
+  LoadTestSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LoadTestVPC
+      CidrBlock: 192.168.0.0/28
+      AvailabilityZone: "us-east-2a"
+      MapPublicIpOnLaunch: true
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsAAAARecord: false
+        EnableResourceNameDnsARecord: false
+        HostnameType: ip-name
+      Tags:
+      - Key: Name
+        Value: Zone2A-LT-1
+      - Key: CREATED
+        Value: !Ref ParamCreationDate
+  LoadTestSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LoadTestVPC
+      CidrBlock: 192.168.0.16/28
+      AvailabilityZone: "us-east-2b"
+      MapPublicIpOnLaunch: true
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsAAAARecord: false
+        EnableResourceNameDnsARecord: false
+        HostnameType: ip-name
+      Tags:
+      - Key: Name
+        Value: Zone2B-LT-2
+      - Key: CREATED
+        Value: !Ref ParamCreationDate
+  LoadTestSubnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LoadTestVPC
+      CidrBlock: 192.168.0.32/28
+      AvailabilityZone: "us-east-2c"
+      MapPublicIpOnLaunch: true
+      PrivateDnsNameOptionsOnLaunch:
+        EnableResourceNameDnsAAAARecord: false
+        EnableResourceNameDnsARecord: false
+        HostnameType: ip-name
+      Tags:
+      - Key: Name
+        Value: Zone2C-LT-3
+      - Key: CREATED
+        Value: !Ref ParamCreationDate
+
+  LTRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref LoadTestVPC
+      Tags:
+      - Key: Name
+        Value: LT-JMeter-RouteTable
+      - Key: CREATED
+        Value: !Ref ParamCreationDate
+  RouteSubnetA:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId: !Ref LoadTestSubnet1
+        RouteTableId: !Ref LTRouteTable
+  RouteSubnetB:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId: !Ref LoadTestSubnet2
+        RouteTableId: !Ref LTRouteTable
+  RouteSubnetC:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId: !Ref LoadTestSubnet3
+        RouteTableId: !Ref LTRouteTable
+
+  LoadTestInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: Name
+        Value: LoadTest-IG
+      - Key: CREATED
+        Value: !Ref ParamCreationDate
+  LoadTestVPCGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref LoadTestVPC
+      InternetGatewayId: !Ref LoadTestInternetGateway
+  LTInternetRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref LTRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref LoadTestInternetGateway
+
+
   LoadTestSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupName: LoadTestSecurityGroup
       GroupDescription: Security Group for load testing using JMeter.
-      VpcId: !Ref ParamVPCID
+      VpcId: !Ref LoadTestVPC
       Tags:
         - Key: Name
           Value: SG-LoadTest-JMeter
@@ -137,15 +276,60 @@ Resources:
       FromPort: 1099
       ToPort: 1099
       SourceSecurityGroupId: !GetAtt LoadTestSecurityGroup.GroupId
-  IngressRuleSSHHome:
+  IngressRuleJmeterStop:
     Type: 'AWS::EC2::SecurityGroupIngress'
     Properties:
-      Description: Allow SSH inbound traffic for specific IP.
+      Description: Allow inbound traffic from the load test security group.
       GroupId: !GetAtt LoadTestSecurityGroup.GroupId
       IpProtocol: tcp
+      FromPort: 4445
+      ToPort: 4445
+      SourceSecurityGroupId: !GetAtt LoadTestSecurityGroup.GroupId
+  IngressNmapScan80:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      Description: Nmap no port scan sends TCP ACK to port 80
+      GroupId: !GetAtt LoadTestSecurityGroup.GroupId
+      IpProtocol: tcp
+      FromPort: 80
+      ToPort: 80
+      SourceSecurityGroupId: !GetAtt LoadTestSecurityGroup.GroupId
+  IngressNmapScan443:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      Description: Nmap no port scan sends TCP SYN to port 443
+      GroupId: !GetAtt LoadTestSecurityGroup.GroupId
+      IpProtocol: tcp
+      FromPort: 443
+      ToPort: 443
+      SourceSecurityGroupId: !GetAtt LoadTestSecurityGroup.GroupId
+  IngressNmapScanIcmp:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      Description: Nmap no port scan sends ICMP echo request and timestamp request. Allowing all for simplicity.
+      GroupId: !GetAtt LoadTestSecurityGroup.GroupId
+      IpProtocol: icmp
+      FromPort: -1
+      ToPort: -1
+      SourceSecurityGroupId: !GetAtt LoadTestSecurityGroup.GroupId
+  IngressSSHInternal:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      Description: SSH protocol between hosts.
+      GroupId: !GetAtt LoadTestSecurityGroup.GroupId
+      IpProtocol: tpc
       FromPort: 22
       ToPort: 22
-      CidrIp: MY PUBLIC IP ADDRESS/32
+      SourceSecurityGroupId: !GetAtt LoadTestSecurityGroup.GroupId
+  IngressSSHExternal:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      Description: Allow SSH inbound traffic for an outside IP.
+      GroupId: !GetAtt LoadTestSecurityGroup.GroupId
+      IpProtocol: tpc
+      FromPort: 22
+      ToPort: 22
+      CidrIp: !Ref ParamExternalIP
 
   LTMaster:
     Type: 'AWS::EC2::Instance'

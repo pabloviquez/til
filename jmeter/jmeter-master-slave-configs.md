@@ -1,5 +1,8 @@
 # Jmeter Master Slave Configuration
 
+## Update
+I did an AWS CloudFormation script, that setups servers and configures them automatically: [Jmeter Master Slave Configuration - AWS](jmeter-master-slave-aws.md).
+
 ## Context & Setup
 For the test I use 3 servers (Ubuntu):
 
@@ -26,8 +29,13 @@ For a default JMeter setup, it's required for the machines to talk to each other
 Name | Port | Protocol | Source | Destination | Action
 --- | --- | --- | --- | --- | ---
 IncomingJmeter | `1099` | `tcp` | *SubNet* | *SubNet* | `Allow`
-SSHOptional | `22` | `tcp` | *SubNet* | *SubNet* | `Allow`
+IncomingJmeter | `4445` | `tcp` | *SubNet* | *SubNet* | `Allow`
 OutgoingJmeter | `1024-65536` | `tcp` | *SubNet* | *SubNet* | `Allow`
+NmapScan | `80` | `tcp` | *SubNet* | *SubNet* | `Allow`
+NmapScan | `443` | `tcp` | *SubNet* | *SubNet* | `Allow`
+NmapScan | `echo` | `ICMP` | *SubNet* | *SubNet* | `Allow`
+NmapScan | `timestamp` | `ICMP` | *SubNet* | *SubNet* | `Allow`
+SSHOptional | `22` | `tcp` | *SubNet* | *SubNet* | `Allow`
 
 ### 1.1. Servers Setup - Java & Network Tools
 ```
