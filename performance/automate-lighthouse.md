@@ -121,3 +121,7 @@ done
 echo "Testing completed."
 ```
 
+## Run
+```bash
+bash lighthouse.sh urls.txt
+```
