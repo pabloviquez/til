@@ -53,44 +53,16 @@ nc: connectx to somehost.or.ipaddress.com port 26 (tcp) failed: Operation timed 
 nc: connectx to somehost.or.ipaddress.com port 27 (tcp) failed: Operation timed out
 nc: connectx to somehost.or.ipaddress.com port 28 (tcp) failed: Operation timed out
 nc: connectx to somehost.or.ipaddress.com port 29 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 30 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 31 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 32 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 33 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 34 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 35 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 36 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 37 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 38 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 39 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 40 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 41 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 42 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 43 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 44 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 45 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 46 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 47 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 48 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 49 (tcp) failed: Operation timed out
-nc: connectx to somehost.or.ipaddress.com port 50 (tcp) failed: Operation timed out
+
+...
+
 nc: connectx to somehost.or.ipaddress.com port 51 (tcp) failed: Operation timed out
 nc: connectx to somehost.or.ipaddress.com port 52 (tcp) failed: Operation timed out
- connectx to home.pabloviquez.com port 24 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 25 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 26 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 27 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 28 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 29 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 30 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 31 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 32 (tcp) failed: Operation timed out
+Connection to somehost.or.ipaddress.com port 53 [tcp/domain] succeeded!
+nc: connectx to somehost.or.ipaddress.com port 54 (tcp) failed: Operation timed out
+nc: connectx to somehost.or.ipaddress.com port 55 (tcp) failed: Operation timed out
+
 ...
-nc: connectx to home.pabloviquez.com port 51 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 52 (tcp) failed: Operation timed out
-Connection to home.pabloviquez.com port 53 [tcp/domain] succeeded!
-nc: connectx to home.pabloviquez.com port 54 (tcp) failed: Operation timed out
-nc: connectx to home.pabloviquez.com port 55 (tcp) failed: Operation timed out
 ```
 
 The scan for port 53, tells me the port is open, however does not tell me if it's responding. More investigation is needed to understand the port services or capabilities.
