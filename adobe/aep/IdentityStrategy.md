@@ -126,3 +126,13 @@ Following the case of **Swim Journey**, we have another identifier which is impo
 </picture>
 
 See [Identity namespace overview](https://experienceleague.adobe.com/en/docs/experience-platform/identity/features/namespaces#identity-type) for more information.
+
+Assuming we have the custom namespaces created, we can now define the identity **unique namespaces and namespace priorities**
+
+<picture>
+  <img src="/adobe/aep/assets/IdentityStrategy-IdentityPriority.png" alt="AEP Identity Priority" width="550" />
+</picture>
+
+See [Implementation guide for Identity Graph Linking Rules](https://experienceleague.adobe.com/en/docs/experience-platform/identity/features/identity-graph-linking-rules/implementation-guide) for more information.
+
+
