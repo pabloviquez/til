@@ -55,7 +55,7 @@ Following the **Swim Journey** case, we can define the following identifiers for
 - **Swimmer_ID**: The unique identifier of the customer in the store's database.
 - **Email_LC_SHA256**: The email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm.
 
-We know that the **Swimmer_ID** is what makes a profile unique.
+We now know **Swimmer_ID** is what makes a profile unique.
 
 But let's not forget about the other concepts, the **Appointment** and **Product** objects. We can define the following identifiers for them:
 - **Appointment_ID**: The unique identifier of the appointment in the store's database.
@@ -63,10 +63,32 @@ But let's not forget about the other concepts, the **Appointment** and **Product
 
 Now we have a clear definition of what makes a profile unique, and we can move to the next step, which is defining the **Identity Graph**.
 
-| Namespace Identifier | Description | Value Example |
-|---------------------|-------------|---------------|
-| `Swimmer_ID` | The unique identifier of the customer in the store's database | `67676767` |
-| `Email_LC_SHA256` | The email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm. | `74feeaab0b49db3ccf547fef30c7f81f8ee44b4793bee57762e2e75fd300942a` |
-| `Appointment_ID` | The unique identifier of the appointment in the store's database. | `506834567` |
-| `Product_ID` | Product unique code. Identifies the product in the store's database. | `FN-PADDLE-GRAY-L` |
+| Namespace Identifier | Type | Description | Value Example |
+|---------------------|----------|-------------|---------------|
+| `Swimmer_ID` | Unique per graph | The unique identifier of the customer in the store's database | `67676767` |
+| `Email_LC_SHA256` | Customer Identifier | The email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm. | `74feeaab0b49db3ccf547fef30c7f81f8ee44b4793bee57762e2e75fd300942a` |
+| `Appointment_ID` | Appointment Identifier | The unique identifier of the appointment in the store's database. | `506834567` |
+| `Product_ID` | Product Identifier | Product unique code. Identifies the product in the store's database. | `FN-PADDLE-GRAY-L` |
 
+With this information we can see how the **Identity Graph** will look like:
+
+<picture>
+  <img src="/adobe/aep/assets/IdentityStrategy-Graph.png" alt="AEP Identity Graph" width="550" />
+</picture>
+
+> [!NOTE]
+> The **Identity Graph** is a representation of how the different identifiers relate to each other and how they are used to identify a profile.
+
+In our example, we can see how three identities relate to each other based on **1** event. We can read as follows: `One profile has one event with one Email_LC_SHA256 and one Appointment_ID`
+
+> [!TIP]
+> Use the AEP Graph Simulation tool to visualize your identity graph and test different scenarios.
+
+<picture>
+  <img src="/adobe/aep/assets/adobe-graph-simulator.webp" alt="AEP Graph Simulator" width="550" />
+</picture>
+
+See [Adobe Graph Simulation UI guide](https://experienceleague.adobe.com/en/docs/experience-platform/identity/features/identity-graph-linking-rules/graph-simulation).
+
+> [!WARNING]
+> Not defining the unique graph identifier makes profiles to collapse into one single large profile. This is a topic for a later post.
