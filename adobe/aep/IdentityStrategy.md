@@ -23,5 +23,13 @@ I come from an _transactional_ background, where the unique identifier is usuall
 >
 > Let's say we have a store called *"Swim Journey"*. The store offers swimming lessons along with swimming gear and accessories. They also have a website where customers book **appointments** for the lessons and also can purchase products. The experience is similar in the mobile app.
 
+In this example, we can identify the following concepts:
+- **Customer**: The person that is buying products or booking appointments.
+- **Appointment**: The booking of a swimming lesson.
+- **Product**: An item available for purchase in the store.
+
+<picture>
+  <img src="/adobe/aep/assets/IdentityStrategy-Concepts.png" alt="Swim Journey Store Concepts" height="350" />
+</picture>
 
 
