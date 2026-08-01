@@ -130,9 +130,23 @@ See [Identity namespace overview](https://experienceleague.adobe.com/en/docs/exp
 Assuming we have the custom namespaces created, we can now define the identity **unique namespaces and namespace priorities**
 
 <picture>
-  <img src="/adobe/aep/assets/IdentityStrategy-IdentityPriority.png" alt="AEP Identity Priority" width="550" />
+  <img src="/adobe/aep/assets/IdentityStrategy-IdentityPriority.png" alt="AEP Identity Priority" width="650" />
 </picture>
 
 See [Implementation guide for Identity Graph Linking Rules](https://experienceleague.adobe.com/en/docs/experience-platform/identity/features/identity-graph-linking-rules/implementation-guide) for more information.
 
+In this configuration, a profile *uniqness* is defined by the **Swimmer_ID**, and the **Email_LC_SHA256** has priority over the **ECID** or **Appointment_ID**.
 
+## How are my schemas structured and how do they relate to each other?
+
+We have:
+- ✅ Identify the profile concepts and how they relate to each other.
+- ✅ Created namespaces for each one of them.
+- ✅ Defined the rules for the identity linking rules graph.
+
+This last part ensures that our identity strategy is correctly implemented and that profiles can be accurately identified and linked across different identifiers.
+
+> [!CAUTION]
+> When working with schemas, **NEVER** enable the schemas for profile unless **YOU'RE SURE** everything works as expected.
+>
+> **ONCE a schema is enabled for profile, it cannot be deleted**
