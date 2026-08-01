@@ -147,7 +147,7 @@ We have:
 > [!CAUTION]
 > When working with schemas, **NEVER** enable the schemas for profile unless **YOU'RE SURE** everything works as expected.
 >
-> **ONCE a schema is enabled for profile, it cannot be deleted**
+> ⚠️ ⚠️ ⚠️ **ONCE a schema is enabled for profile, it cannot be deleted** ⚠️ ⚠️ ⚠️
 
 I know you heard the `never say never` phrase, but in this case, it is true, **never** enable a schema for profile unless you're sure it works as you want, the structure is correct and follows best practices.
 
@@ -162,6 +162,6 @@ Now that we have the identity graph defined, it's important to set how are all o
 
 For our example, let's say we have two schemas:
 - **Core Swimmer Profile** used for the main profile information, like name, email address, home address, etc.
-- **Swimmer Appointments** used for storing appointment-related information, like appointment ID, date, time, and location.
+- **Swimmer Appointments** This schema defines the appointments
 
 
