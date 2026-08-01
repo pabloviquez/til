@@ -11,7 +11,7 @@ This is key when taking over an Adobe Experience Platform (AEP) implementation, 
 
 An identity strategy should answer the following questions:
 - What makes a profile unique?
-- How can I identify a pro◊file and which identifiers have priority?
+- How can I identify a profile and which identifiers have priority?
 - What rules does my graph identity follow?
 - How are my schemas structured and how do they relate to each other?
 
@@ -22,6 +22,8 @@ I come from an _transactional_ background, where the unique identifier is usuall
 > **Example Use Case**
 >
 > Let's say we have a store called *"Swim Journey"*. The store offers swimming lessons along with swimming gear and accessories. They also have a website where customers book **appointments** for the lessons and also can purchase products. The experience is similar in the mobile app.
+>
+> Customers uses the email to login in the website or app, and they opt-in to receve communications from the store by email and push notifications.
 
 In this example, we can identify the following concepts:
 - **Customer**: The person that is buying products or booking appointments.
@@ -32,4 +34,39 @@ In this example, we can identify the following concepts:
   <img src="/adobe/aep/assets/IdentityStrategy-Concepts.png?v=2" alt="Swim Journey Store Concepts" width="550" />
 </picture>
 
+In this case, we can see that the **Customer** is the main object, and the **Appointment** and **Product** are related to it, still concepts that requires unique identification but we're going to communicate to **Customers**, this will be our **Addressable Profile**.
+
+Now the question, **how do we identify a customer?**
+In the *Swim Journey* example, we can identify customers by their email address, but later we found that the store also has a unique customer identifier in their database called **SwimmerID** which is different from the email address.
+
+For this case we will define two identifiers for the **Customer** object:
+- **Email_LC_SHA256**: The email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm.
+- **Swimmer_ID**: The unique identifier of the customer in the store's database
+
+**Swim Journey** will use only one identifier to define a unique customer, in our case, the profile unique identifier will be **SWIMMER_ID**
+
+> [!TIP]
+> **Email_LC_SHA256** Sounds complicated but it's a common practice and a good one, as it allows to use the email address as an identifier but also protects the *privacy* of the customer by hashing it. The lowercasing is also important as it avoids duplicates due to case sensitivity.
+>
+> IF you later want to use RTCDP, having the Email_LC_SHA256 as identifier will be required.
+
+## How can I identify a profile and which identifiers have priority?
+Following the **Swim Journey** case, we can define the following identifiers for the **Customer** object:
+- **Swimmer_ID**: The unique identifier of the customer in the store's database.
+- **Email_LC_SHA256**: The email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm.
+
+We know that the **Swimmer_ID** is what makes a profile unique.
+
+But let's not forget about the other concepts, the **Appointment** and **Product** objects. We can define the following identifiers for them:
+- **Appointment_ID**: The unique identifier of the appointment in the store's database.
+- **Product_ID**: The unique identifier of the product in the store's database.
+
+Now we have a clear definition of what makes a profile unique, and we can move to the next step, which is defining the **Identity Graph**.
+
+| Namespace Identifier | Description | Value Example |
+|---------------------|-------------|---------------|
+| `Swimmer_ID` | The unique identifier of the customer in the store's database | `67676767` |
+| `Email_LC_SHA256` | The email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm. | `74feeaab0b49db3ccf547fef30c7f81f8ee44b4793bee57762e2e75fd300942a` |
+| `Appointment_ID` | The unique identifier of the appointment in the store's database. | `506834567` |
+| `Product_ID` | Product unique code. Identifies the product in the store's database. | `FN-PADDLE-GRAY-L` |
 
