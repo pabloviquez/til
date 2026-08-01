@@ -1,7 +1,7 @@
 # Guide for Identity Strategy
 
 ## Intro
-I wanted to write a quick guide to succesfully define the profile strategy based on my learnings and experiences. However, this requires to provide context and go over some concepts that are important to understand before defining the strategy.
+I wanted to write a quick guide to successfully define the profile strategy based on my learnings and experiences. However, this requires to provide context and go over some concepts that are important to understand before defining the strategy.
 
 ## What is an Identity Strategy?
 This is key when taking over an Adobe Experience Platform (AEP) implementation, as it's the base on how the project will structure it's data, how the different use-cases will be implemented and how the data will be used to create a single customer view.
@@ -13,7 +13,7 @@ An identity strategy should answer the following questions:
 - What makes a profile unique?
 - How can I identify a profile and which identifiers have priority?
 - What rules does my graph identity follow?
-- How are my schemas structured and how do they relate to each other?
+- How are the schemas structured and profiles stitched together?
 
 ## What makes a profile unique?
 I come from an _transactional_ background, where the unique identifier is usually a primary key in a database, and while this concept is also true in AEP, we must take a step back and see profiles as **objects** first.
@@ -135,18 +135,33 @@ Assuming we have the custom namespaces created, we can now define the identity *
 
 See [Implementation guide for Identity Graph Linking Rules](https://experienceleague.adobe.com/en/docs/experience-platform/identity/features/identity-graph-linking-rules/implementation-guide) for more information.
 
-In this configuration, a profile *uniqness* is defined by the **Swimmer_ID**, and the **Email_LC_SHA256** has priority over the **ECID** or **Appointment_ID**.
+In this configuration, a profile *uniqueness* is defined by the **Swimmer_ID**, and the **Email_LC_SHA256** has priority over the **ECID** or **Appointment_ID**.
 
-## How are my schemas structured and how do they relate to each other?
+## How are the schemas structured and profiles stitched together?
 
 We have:
-- ✅ Identify the profile concepts and how they relate to each other.
+- ✅ Identified the profile concepts and how they relate to each other.
 - ✅ Created namespaces for each one of them.
 - ✅ Defined the rules for the identity linking rules graph.
-
-This last part ensures that our identity strategy is correctly implemented and that profiles can be accurately identified and linked across different identifiers.
 
 > [!CAUTION]
 > When working with schemas, **NEVER** enable the schemas for profile unless **YOU'RE SURE** everything works as expected.
 >
 > **ONCE a schema is enabled for profile, it cannot be deleted**
+
+I know you heard the `never say never` phrase, but in this case, it is true, **never** enable a schema for profile unless you're sure it works as you want, the structure is correct and follows best practices.
+
+<picture>
+  <img src="/adobe/aep/assets/test-in-production-meme-1.jpg" alt="Test in Production Meme" width="550" />
+</picture>
+
+Now that we have the identity graph defined, it's important to set how are all of these identifiers, anc concepts going to be put together in a single profile. This single profile picture is **Union View** and the process to bring all data together is called **Identity stitching**.
+
+> [!NOTE]
+> Identity stitching is the process of identifying data fragments and stitching them together to form a complete record of a profile. Private graph is private map of relationships between stitched and linked identities.
+
+For our example, let's say we have two schemas:
+- **Core Swimmer Profile** used for the main profile information, like name, email address, home address, etc.
+- **Swimmer Appointments** used for storing appointment-related information, like appointment ID, date, time, and location.
+
+
