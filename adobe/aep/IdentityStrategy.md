@@ -29,7 +29,7 @@ In this example, we can identify the following concepts:
 - **Product**: An item available for purchase in the store.
 
 <picture>
-  <img src="/adobe/aep/assets/IdentityStrategy-Concepts.png" alt="Swim Journey Store Concepts" width="500" />
+  <img src="/adobe/aep/assets/IdentityStrategy-Concepts.png" alt="Swim Journey Store Concepts" width="550" />
 </picture>
 
 
