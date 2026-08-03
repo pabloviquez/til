@@ -24,6 +24,8 @@ I come from an _transactional_ background, where the unique identifier is usuall
 > Let's say we have a store called *"Swim Journey"*. The store offers swimming lessons along with swimming gear and accessories. They also have a website where customers book **appointments** for the lessons and also can purchase products. The experience is similar in the mobile app.
 >
 > Customers uses the email to login in the website or app, and they opt-in to receve communications from the store by email and push notifications.
+>
+> Customers are able to book appointments for swimming lessons online, they can create a new account in the web and book an appointment. AEP will not receive the `Swimmer_ID` until one or two days later.
 
 In this example, we can identify the following concepts:
 - **Customer**: The person that is buying products or booking appointments.
@@ -34,7 +36,7 @@ In this example, we can identify the following concepts:
   <img src="/adobe/aep/assets/IdentityStrategy-Concepts.png?v=2" alt="Swim Journey Store Concepts" width="550" />
 </picture>
 
-In this case, we can see that the **Customer** is the main object, and the **Appointment** and **Product** are related to it, still concepts that requires unique identification but we're going to communicate to **Customers**, this will be our **Addressable Profile**.
+We can see that the **Customer** is the main object, and the **Appointment** and **Product** are related to it, still concepts that requires unique identification but we're going to communicate to **Customers**, this will be our **Addressable Profile**.
 
 Now the question, **how do we identify a customer?**
 In the *Swim Journey* example, we can identify customers by their email address, but later we found that the store also has a unique customer identifier in their database called **SwimmerID** which is different from the email address.
@@ -51,6 +53,8 @@ For this case we will define two identifiers for the **Customer** object:
 > IF you later want to use RTCDP, having the Email_LC_SHA256 as identifier will be required.
 
 ## How can I identify a profile and which identifiers have priority?
+In this step, we define the identifiers and create all necesary namespaces in AEP.
+
 Following the **Swim Journey** case, we can define the following identifiers for the **Customer** object:
 - **Swimmer_ID**: The unique identifier of the customer in the store's database.
 - **Email_LC_SHA256**: The email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm.
@@ -96,6 +100,8 @@ See [Adobe Graph Simulation UI guide](https://experienceleague.adobe.com/en/docs
 
 
 ## What rules does my graph identity follow?
+
+The focus of this step is to set up the unique namespaces and namespace priorities.
 
 We now have a clear picture of how the identifiers relate to each other, but we need to define the rules that will govern how the graph identity is built.
 
@@ -161,3 +167,5 @@ For **Swim Journey Store**, I'm going to pick **timestamp ordered** as the merge
 </picture>
 
 # Summary - Printable Version
+
+I created a Word document with a simple summary to print and use as a reference for your identity strategy. [Download Profile Strategy Guide](/adobe/aep/assets/ProfileStrategyGuide.docx)
