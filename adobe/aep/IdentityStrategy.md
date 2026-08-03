@@ -25,7 +25,7 @@ I come from a _transactional_ background, where the unique identifier is usually
 >
 > Customers use their email to log in in to the website or app, and they opt-in to receive communications from the store by email and push notifications.
 >
-> Customers are able to book appointments for swimming lessons online, they can create a new account in the web and book an appointment. AEP will not receive the `Swimmer_ID` until one or two days later.
+> Customers are able to book appointments for swimming lessons online, and new customers can create an account in the website or app, but the actual customer identifier will not be available until the customer finalize the customer subscription and sign all documents in the physical store.
 
 In this example, we can identify the following concepts:
 - **Customer**: The person that is buying products or booking appointments.
@@ -87,7 +87,7 @@ With this information we can see how the **Identity Graph** will look like:
 > [!NOTE]
 > The **Identity Graph** is a representation of how the different identifiers relate to each other and how they are used to identify a profile.
 
-In our example, we can see how four identities relate to each other based on **1** event. We can read as follows: `One profile has one event with one Email_LC_SHA256, one Appointment_ID, and one ECID`.
+In our example, we can see how four identities relate to each other based on **one** event. This translates to: `A single customer profile is associated with one event that ties together their Email_LC_SHA256, Appointment_ID, and ECID`.
 
 > [!TIP]
 > Use the AEP Graph Simulation tool to visualize your identity graph and test different scenarios.
