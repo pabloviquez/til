@@ -1,10 +1,10 @@
 # Guide for Identity Strategy
 
 ## Intro
-I wanted to write a quick guide to successfully define the profile strategy based on my learnings and experiences. However, this requires to provide context and go over some concepts that are important to understand before defining the strategy.
+I wanted to write a quick guide to successfully define the profile strategy based on my learnings and experiences. However, this requires providing context and go over some concepts that are important to understand before defining the strategy.
 
 ## What is an Identity Strategy?
-This is key when taking over an Adobe Experience Platform (AEP) implementation, as it's the base on how the project will structure it's data, how the different use-cases will be implemented and how the data will be used to create a single customer view.
+This is key when taking over an Adobe Experience Platform (AEP) implementation, as it's the base on how the project will structure its data, how the different use-cases will be implemented and how the data will be used to create a single customer view.
 
 > [!IMPORTANT]
 > A good definition can help on keeping cost under control, as Adobe charges per **Addressable Profile**, a loose strategy can lead to higher costs and a more complex implementation.
@@ -16,14 +16,14 @@ An identity strategy should answer the following questions:
 - How are the schemas structured and profiles stitched together?
 
 ## What makes a profile unique?
-I come from an _transactional_ background, where the unique identifier is usually a primary key in a database, and while this concept is also true in AEP, we must take a step back and see profiles as **objects** first.
+I come from a _transactional_ background, where the unique identifier is usually a primary key in a database, and while this concept is also true in AEP, we must take a step back and see profiles as **objects** first.
 
 ### Case - Store
 > **Example Use Case**
 >
 > Let's say we have a store called *"Swim Journey"*. The store offers swimming lessons along with swimming gear and accessories. They also have a website where customers book **appointments** for the lessons and also can purchase products. The experience is similar in the mobile app.
 >
-> Customers uses the email to login in the website or app, and they opt-in to receve communications from the store by email and push notifications.
+> Customers use their email to log in in to the website or app, and they opt-in to receive communications from the store by email and push notifications.
 >
 > Customers are able to book appointments for swimming lessons online, they can create a new account in the web and book an appointment. AEP will not receive the `Swimmer_ID` until one or two days later.
 
@@ -36,7 +36,7 @@ In this example, we can identify the following concepts:
   <img src="/adobe/aep/assets/IdentityStrategy-Concepts.png?v=2" alt="Swim Journey Store Concepts" width="550" />
 </picture>
 
-We can see that the **Customer** is the main object, and the **Appointment** and **Product** are related to it, still concepts that requires unique identification but we're going to communicate to **Customers**, this will be our **Addressable Profile**.
+We can see that the **Customer** is the main object, and the **Appointment** and **Product** are related to it, still concepts that require unique identification but we're going to communicate to **Customers**, this will be our **Addressable Profile**.
 
 Now the question, **how do we identify a customer?**
 In the *Swim Journey* example, we can identify customers by their email address, but later we found that the store also has a unique customer identifier in their database called **SwimmerID** which is different from the email address.
@@ -53,7 +53,7 @@ For this case we will define two identifiers for the **Customer** object:
 > IF you later want to use RTCDP, having the Email_LC_SHA256 as identifier will be required.
 
 ## How can I identify a profile and which identifiers have priority?
-In this step, we define the identifiers and create all necesary namespaces in AEP.
+In this step, we define the identifiers and create all necessary namespaces in AEP.
 
 Following the **Swim Journey** case, we can define the following identifiers for the **Customer** object:
 - **Swimmer_ID**: The unique identifier of the customer in the store's database.
@@ -65,7 +65,7 @@ But let's not forget about the other concepts, the **Appointment** and **Product
 - **Appointment_ID**: The unique identifier of the appointment in the store's database.
 - **Product_ID**: The unique identifier of the product in the store's database.
 
-**Another** identifier we cannot forget is the **ECID**. As customer uses the website and mobile app, Adobe Experience Platform will generate an sticky identifier to the customer device, this Experience Cloud Identifier is called **ECID**. The ECID is unique per device, for example, if I browse the site using one browser, then open another browser, the ECID will be different.
+**Another** identifier we cannot forget is the **ECID**. As a customer uses the website and mobile app, Adobe Experience Platform will generate a sticky identifier for the customer device, this Experience Cloud Identifier is called **ECID**. The ECID is unique per device, for example, if I browse the site using one browser, then open another browser, the ECID will be different.
 
 **Identity Graph**
 Now that we have a clear definition of what makes a profile unique, we can move to the next step, which is defining the **Identity Graph**.
@@ -106,7 +106,7 @@ The focus of this step is to set up the unique namespaces and namespace prioriti
 We now have a clear picture of how the identifiers relate to each other, but we need to define the rules that will govern how the graph identity is built.
 
 > [!WARNING]
-> Not defining the rules and priorities causes profiles to be linked together incorrectly, to the point of having customers receiveing notifications for someone else activity. I'll address **Profile Collapse** in a later post, but for now let's say we don't want that for our store **Swim Journey**
+> Not defining the rules and priorities causes profiles to be linked together incorrectly, to the point of having customers receiving notifications for someone else activity. I'll address **Profile Collapse** in a later post, but for now let's say we don't want that for our store **Swim Journey**
 
 Following the case of **Swim Journey**, we have another identifier which is important to consider.
 
@@ -149,7 +149,7 @@ We have:
 - ✅ Created namespaces for each one of them.
 - ✅ Defined the rules for the identity linking rules graph.
 
-The next step is to define how does the data is put together in a single profile. This process that takes all data needs to follow a set of rules and policies. This is called **Merge Policies**.
+The next step is to define how data is put together in a single profile. The process that takes all this data needs to follow a set of rules and policies is called **Merge Policies**.
 
 > [!NOTE]
 > Merge policies are rules that help Adobe Experience Platform bring fragments of data, and combine them in a prioritized manner to create a Real-Time Customer Profile.
