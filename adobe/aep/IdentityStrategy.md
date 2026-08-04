@@ -173,4 +173,4 @@ For **Swim Journey Store**, I'm going to pick **timestamp ordered** as the merge
 
 # Summary - Printable Version
 
-I created a Word document with a simple summary to print and use as a reference for your identity strategy. [Download Profile Strategy Guide](/adobe/aep/assets/ProfileStrategyGuide.docx)
+I created a Word document with a simple summary to print and use as a reference for your identity strategy. [Download Identity StrategyGuide.docx](/adobe/aep/assets/IdentityStrategyGuide.docx)
