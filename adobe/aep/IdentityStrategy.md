@@ -66,14 +66,14 @@ Following the **Swim Journey** case, we can define the following identifiers for
 We now know **Swimmer_ID**, and **Email_LC_SHA256** are what makes a profile unique.
 
 **What about appointments and products?**
-For this case we're solving for, these concepts are very important but not part of the **Addressable Audience**. We have to separate the concepts between what makes a profile and what actions is the customer taking.
+For the case we're solving for, these concepts are very important but not part of the **Addressable Audience**. We have to separate the concepts between what makes a profile and what actions are customers taking.
 
-The *Identity Strategy* defines the rules for the profile, what *objects* identify a customer, and how do they relate to each other. Appointments are customer actions, that have different states (Scheduled, Canceled, Updated, etc) and products are "Non-people identifiers" that are related to the customer but not part of the profile.
+The *Identity Strategy* defines the rules for the profile, what *objects* identify a customer, and how do they relate to each other. Appointments are customer actions that have different states (Scheduled, Canceled, Updated, etc) and products are "Non-people identifiers" that are related to the customer but not part of the profile.
 
 > [!TIP]
-> Create the identifiers you actually need, and not the ones you think you will need. A good design should allow you to scale, therefore.
+> Create the identifiers you actually need, and not the ones you think you will need. A good design should allow you to scale.
 
-**Another** identifier we cannot forget is the **ECID**. As a customer uses the website and mobile app, Adobe Experience Platform will generate a sticky identifier for the customer device. This Experience Cloud Identifier is called **ECID**. The ECID is unique per device, for example, if I browse the site using one browser, then open another browser, the ECID will be different.
+**Another** identifier we cannot forget is the **ECID**. As a customer uses the website and mobile app, Adobe Experience Platform will generate a sticky identifier for the customer device. This device identifier is called _Experience Cloud Identifier_ or  **ECID**. The ECID is unique per device, for example, if I browse the site using one browser, then open another browser, the ECID will be different.
 
 **Identity Graph**
 Now that we have a clear definition of what makes a profile unique, we can move to the next step, which is defining the **Identity Graph**.
@@ -94,7 +94,7 @@ With this information we can see how the **Identity Graph** will look like:
 > [!NOTE]
 > The **Identity Graph** is a representation of how the different identifiers relate to each other and how they are used to identify a profile.
 
-In our example, we can see how four identities relate to each other based on **one** event. This translates to: `A single customer profile is associated with one event that ties together their Email_LC_SHA256, Appointment_ID, and ECID`.
+In our example, we can see how four identities relate to each other based on **one** event. This translates to: `A single customer profile is associated with one event that ties together their Email_LC_SHA256, and ECID`.
 
 > [!TIP]
 > Use the AEP Graph Simulation tool to visualize your identity graph and test different scenarios.
@@ -122,8 +122,6 @@ Following the case of **Swim Journey**, we have another identifier which is impo
 |----------------------|----------------|--------------|
 | `Swimmer_ID` | Custom Namespace | `Cross-Device ID` |
 | `Email_LC_SHA256` | Standard Namespace | `Email` |
-| `Appointment_ID` | Custom Namespace | `Cross-Device ID` |
-| `Product_ID` | Custom Namespace | `Non-people identifier` |
 | `ECID` | Standard Namespace | `Cookie ID` |
 
 ### Identity Types
@@ -147,7 +145,7 @@ Assuming we have the custom namespaces created, we can now define the identity *
 
 See [Implementation guide for Identity Graph Linking Rules](https://experienceleague.adobe.com/en/docs/experience-platform/identity/features/identity-graph-linking-rules/implementation-guide) for more information.
 
-In this configuration, a profile *uniqueness* is defined by the **Swimmer_ID**, and the **Email_LC_SHA256** has priority over the **ECID** or **Appointment_ID**.
+In this configuration, a profile *uniqueness* is defined by the **Swimmer_ID**, and the **Email_LC_SHA256** has priority over the **ECID**.
 
 ## How are the schemas structured and profiles stitched together?
 
