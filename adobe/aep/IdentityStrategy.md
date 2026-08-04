@@ -1,13 +1,17 @@
 # Guide for Identity Strategy
 
 ## Intro
-I wanted to write a quick guide to successfully define the profile strategy based on my learnings and experiences. However, this requires providing context and going through some concepts that are important to understand before defining the strategy.
+I wanted to write a short guide to defining an identity strategy that holds up in production based on my learnings and experiences. However, this requires providing context and going through some concepts that are important to understand before defining the strategy.
 
 ## What is an Identity Strategy?
 The Identity Strategy is key when taking over an Adobe Experience Platform (AEP) implementation, as it's the foundation for how the project will structure its data, how the different use-cases will be implemented and how the data will be used to create a single customer view.
 
 > [!IMPORTANT]
-> A good identity strategy definition can help on keeping cost under control, as Adobe charges per **Addressable Profile**, a loose strategy can lead to higher costs and a more complex implementation.
+> A good identity strategy definition helps keep costs under control, as Adobe charges per **Addressable Audience**.
+>
+> A loose strategy can inflate profile counts due to fragmentation leading to higher costs and a more complex implementation.
+>
+> Strict or aggressive strategy could cause profile collapse creating a bad customer experience and even legal issues.
 
 An identity strategy should answer the following questions:
 - What makes a profile unique?
@@ -23,9 +27,9 @@ I come from a _transactional_ background, where the unique identifier is usually
 >
 > Let's say we have a store called *"Swim Journey"*. The store offers swimming lessons along with swimming gear and accessories. They also have a website where customers book **appointments** for the lessons and also can purchase products. The experience is similar in the mobile app.
 >
-> Customers use their email to log in in to the website or app, and they opt-in to receive communications from the store by email and push notifications.
+> Customers use their email to log in to the website or app, and they opt-in to receive communications from the store by email and push notifications.
 >
-> Customers are able to book appointments for swimming lessons online, and new customers can create an account in the website or app, but the actual customer identifier will not be available until the customer finalizes the customer subscription and sign all documents in the physical store.
+> Customers are able to book appointments for swimming lessons online, and new customers can create an account on the website or app, but the actual customer identifier will not be available until the customer completes their subscription and signs the paperwork in the physical store.
 
 In this example, we can identify the following concepts:
 - **Customer**: The person that is buying products or booking appointments.
@@ -36,7 +40,7 @@ In this example, we can identify the following concepts:
   <img src="/adobe/aep/assets/IdentityStrategy-Concepts.png?v=2" alt="Swim Journey Store Concepts" width="550" />
 </picture>
 
-We can see that the **Customer** is the main object, and the **Appointment** and **Product** are related to it, still concepts that require unique identification but we're going to communicate to **Customers**, this will be our **Addressable Profile**.
+We can see that the **Customer** is the main object, and the **Appointment** and **Product** are related to it, still concepts that require unique identification but we're going to communicate to **Customers**, this will be our **Addressable Audience**.
 
 Now the question, **how do we identify a customer?**
 In the *Swim Journey* example, we can identify customers by their email address, but later we found that the store also has a unique customer identifier in their database called **SwimmerID** which is different from the email address.
@@ -50,7 +54,7 @@ For this case we will define two identifiers for the **Customer** object:
 > [!TIP]
 > **Email_LC_SHA256** Sounds complicated but it's a common practice and a good one, as it allows to use the email address as an identifier but also protects the *privacy* of the customer by hashing it. The lowercasing is also important as it avoids duplicates due to case sensitivity.
 >
-> IF you later want to use RTCDP, having the Email_LC_SHA256 as identifier will be required.
+> IF you later want to use RTCDP, having the Email_LC_SHA256 as identifier is used for different platforms identification and you'll be glad you did.
 
 ## How can I identify a profile and which identifiers have priority?
 In this step, we define the identifiers and create all necessary namespaces in AEP.
@@ -61,9 +65,13 @@ Following the **Swim Journey** case, we can define the following identifiers for
 
 We now know **Swimmer_ID**, and **Email_LC_SHA256** are what makes a profile unique.
 
-But let's not forget about the other concepts, the **Appointment** and **Product** objects. We can define the following identifiers for them:
-- **Appointment_ID**: The unique identifier of the appointment in the store's database.
-- **Product_ID**: The unique identifier of the product in the store's database.
+**What about appointments and products?**
+For this case we're solving for, these concepts are very important but not part of the **Addressable Audience**. We have to separate the concepts between what makes a profile and what actions is the customer taking.
+
+The *Identity Strategy* defines the rules for the profile, what *objects* identify a customer, and how do they relate to each other. Appointments are customer actions, that have different states (Scheduled, Canceled, Updated, etc) and products are "Non-people identifiers" that are related to the customer but not part of the profile.
+
+> [!TIP]
+> Create the identifiers you actually need, and not the ones you think you will need. A good design should allow you to scale, therefore.
 
 **Another** identifier we cannot forget is the **ECID**. As a customer uses the website and mobile app, Adobe Experience Platform will generate a sticky identifier for the customer device. This Experience Cloud Identifier is called **ECID**. The ECID is unique per device, for example, if I browse the site using one browser, then open another browser, the ECID will be different.
 
@@ -74,7 +82,6 @@ Now that we have a clear definition of what makes a profile unique, we can move 
 |---------------------|----------|-------------|
 | `Swimmer_ID` | The unique identifier of the customer in the store's database | `67676767` |
 | `Email_LC_SHA256` | Customer unique identifier, this is the email address of the customer. LC stands for LowerCase and hashed with SHA256 algorithm. | `74feeaab0b49db3ccf547fef30c7f81f8ee44b4793bee57762e2e75fd300942a` |
-| `Appointment_ID` | The unique identifier of the appointment in the store's database. | `506834567` |
 | `Product_ID` | Product unique code. Identifies the product in the store's database. | `FN-PADDLE-GRAY-L` |
 | `ECID` | Experience Cloud Identifier. Unique identifier generated by Adobe Experience Platform for each customer device. | `1234567890123456789012345678901234567890` |
 
@@ -114,7 +121,7 @@ Following the case of **Swim Journey**, we have another identifier which is impo
 | Namespace Identifier | Namespace Type | Identity Type |
 |----------------------|----------------|--------------|
 | `Swimmer_ID` | Custom Namespace | `Cross-Device ID` |
-| `Email_LC_SHA256` | Standard Namespace | `Cross-Device ID` |
+| `Email_LC_SHA256` | Standard Namespace | `Email` |
 | `Appointment_ID` | Custom Namespace | `Cross-Device ID` |
 | `Product_ID` | Custom Namespace | `Non-people identifier` |
 | `ECID` | Standard Namespace | `Cookie ID` |
