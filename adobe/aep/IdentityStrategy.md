@@ -73,9 +73,9 @@ The *Identity Strategy* defines the rules for the profile, what *objects* identi
 > [!TIP]
 > Create the identifiers you actually need, and not the ones you think you will need. A good design should allow you to scale.
 
-**Another** identifier we cannot forget is the **ECID**. s a customer uses the website and mobile app, Adobe's Web and Mobile SDKs generate a sticky identifier called the Experience Cloud Identifier, or ECID.
+**Another** identifier we cannot forget is the **ECID**. When a customer uses the website or mobile app, Adobe's Web and Mobile SDKs generate a sticky identifier called the Experience Cloud Identifier, or ECID.
 
-An ECID is unique per browser or app installation. The same phone can produce three different ECIDs: one in Safari, one in Chrome, one in the app. ECIDs also decay: clearing cookies, private browsing, and app reinstalls all mint a new one. That volatility is exactly why cookie IDs sit at the bottom of the priority list we'll define in the next section.
+An ECID is unique per browser or app installation. The same phone can produce three different ECIDs: one in Safari, one in Chrome, one in the app. ECIDs can be also removed, clearing cookies, private browsing, and app reinstalls all mint a new one. That volatility is exactly why cookie IDs sit at the bottom of the priority list we'll define in the next section.
 
 **Identity Graph**
 Now that we have a clear definition of what makes a profile unique, we can move to the next step, which is defining the **Identity Graph**.
@@ -96,7 +96,7 @@ With this information we can see how the **Identity Graph** will look like:
 > [!NOTE]
 > The **Identity Graph** is a representation of how the different identifiers relate to each other and how they are used to identify a profile.
 
-In our example, three identities are tied together by a single event. This translates to: `A single customer profile is associated with one event that ties together their Email_LC_SHA256, and ECID`.
+In our example, three identities are tied together by a single event. This translates to: `A single customer profile `SWIMMER_ID` is associated with one event that ties together their Email_LC_SHA256, and ECID`.
 
 > [!TIP]
 > Use the AEP Graph Simulation tool to visualize your identity graph and test different scenarios.
@@ -147,7 +147,7 @@ Assuming we have the custom namespaces created, we can now define the identity *
 
 See [Implementation guide for Identity Graph Linking Rules](https://experienceleague.adobe.com/en/docs/experience-platform/identity/features/identity-graph-linking-rules/implementation-guide) for more information.
 
-In this configuration, a profile *uniqueness* is defined by the **Swimmer_ID**, and the **Email_LC_SHA256** has priority over the **ECID**.
+In this configuration, a profile *uniqueness* is defined by the **Swimmer_ID**, and the **Email_LC_SHA256**.
 
 ## How are the schemas structured and profiles stitched together?
 
@@ -171,6 +171,17 @@ For **Swim Journey Store**, I'm going to pick **timestamp ordered** as the merge
 
 <picture>
   <img src="/adobe/aep/assets/IdentityStrategy-MergePolicy.png" alt="AEP Merge Policy" width="550" />
+</picture>
+
+For the last part, we now move to **schemas** and how to create them so they work for our strategy. Schemas defines how the data is going to be structured and stored in the AEP datasets.
+
+> [!CAUTION]
+> When working with schemas, **NEVER** enable the schemas for profile unless **YOU'RE SURE** everything works as expected.
+>
+> **ONCE a schema is enabled for profile, it cannot be deleted**
+
+<picture>
+  <img src="/adobe/aep/assets/test-in-production-meme-1.jpg" alt="Test in Production Meme" width="550" />
 </picture>
 
 # Summary - Printable Version
