@@ -159,7 +159,9 @@ We have:
 The next step is to define how data is put together in a single profile. The process that takes all this data needs to follow a set of rules and policies called **Merge Policies**.
 
 > [!NOTE]
-> Merge policies are rules that help Adobe Experience Platform bring fragments of data, and combine them in a prioritized manner to create a Real-Time Customer Profile.
+> **Merge Policies** are rules that tell Adobe Experience Platform how to bring fragments of data, and combine them in a prioritized manner to create a Real-Time Customer Profile.
+>
+> **Identity Service** is a service within Experience Platform that links (or unlinks) identities to maintain identity graphs.
 
 There are two possible merge methods available for merge policies:
 - **Dataset precedence**: In the event of a conflict, give priority to profile fragments based on the dataset from which they came.
@@ -173,7 +175,8 @@ For **Swim Journey Store**, I'm going to pick **timestamp ordered** as the merge
   <img src="/adobe/aep/assets/IdentityStrategy-MergePolicy.png" alt="AEP Merge Policy" width="550" />
 </picture>
 
-For the last part, we now move to **schemas** and how to create them so they work for our strategy. Schemas defines how the data is going to be structured and stored in the AEP datasets.
+### Schemas
+For the last part, we now move to **Schemas** and how to create them so they work for our strategy. Schemas defines how the data is going to be structured and stored in the AEP datasets.
 
 > [!CAUTION]
 > When working with schemas, **NEVER** enable the schemas for profile unless **YOU'RE SURE** everything works as expected.
@@ -183,6 +186,28 @@ For the last part, we now move to **schemas** and how to create them so they wor
 <picture>
   <img src="/adobe/aep/assets/test-in-production-meme-1.jpg" alt="Test in Production Meme" width="550" />
 </picture>
+
+The first thing to define is how are schemas going to identify profiles. We know that **Swimmer_ID** and **Email_LC_SHA256** are the identifiers that make a profile unique, but *how do we set the schemas to use them?*
+
+The answer is the **Primary Identity** in the schema. The primary identity is the identifier that will be used to identify a profile in the schema.
+
+> [!TIP]
+> Create a field group for the identifiers, so it can be reused in different schemas.
+
+As an example, I created a field group called **SJ Identity Core v1**:
+<picture>
+  <img src="/adobe/aep/assets/IdentityStrategy-SchemaFieldGroup.png" alt="Schema Field Group" width="550" />
+</picture>
+
+**Identity Map VS Primary Identities**
+Identity Map is a field that provides flexibility on how do you store the identity used and how multiple identities are linked together. But it's a JSON object, making the update more complex. Don't get me wrong, I love using it whenever I can, but for a base profile schema, let's keep it simple.
+
+<picture>
+  <img src="/adobe/aep/assets/IdentityStrategy-SchemaIdentity.png" alt="Schema Primary Identity" width="550" />
+</picture>
+
+> [!TIP]
+> Don't be shy to add descriptions. The more you can document your schemas the better. Adobe CX Enterprise Coworker and other AI tools will read them and have better understanding of your data.
 
 # Summary - Printable Version
 
