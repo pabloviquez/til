@@ -4,7 +4,7 @@
 I wanted to write a short guide to defining an identity strategy that holds up in production based on my learnings and experiences. However, this requires providing context and going through some concepts that are important to understand before defining the strategy.
 
 ## What is an Identity Strategy?
-The Identity Strategy is key when taking over an Adobe Experience Platform (AEP) implementation, as it's the foundation for how the project will structure its data, how the different use-cases will be implemented and how the data will be used to create a single customer view.
+The Identity Strategy is key when starting an Adobe Experience Platform (AEP) implementation, as it's the foundation for how the project will structure its data, how the different use-cases will be implemented, and how the data will be used to create a single customer view.
 
 > [!IMPORTANT]
 > A good identity strategy definition helps keep costs under control, as Adobe charges per **Addressable Audience**.
@@ -75,7 +75,7 @@ The *Identity Strategy* defines the rules for the profile, what *objects* identi
 
 **Another** identifier we cannot forget is the **ECID**. When a customer uses the website or mobile app, Adobe's Web and Mobile SDKs generate a sticky identifier called the Experience Cloud Identifier, or ECID.
 
-An ECID is unique per browser or app installation. The same phone can produce three different ECIDs: one in Safari, one in Chrome, one in the app. ECIDs can be also removed, clearing cookies, private browsing, and app reinstalls all mint a new one. That volatility is exactly why cookie IDs sit at the bottom of the priority list we'll define in the next section.
+An ECID is unique per browser or app installation. The same phone can produce three different ECIDs: one in Safari, one in Chrome, one in the app. ECIDs can be also removed, clearing cookies, private browsing, and app reinstalls all generates a new one.
 
 **Identity Graph**
 Now that we have a clear definition of what makes a profile unique, we can move to the next step, which is defining the **Identity Graph**.
@@ -94,7 +94,7 @@ With this information we can see how the **Identity Graph** will look like:
 </picture>
 
 > [!NOTE]
-> The **Identity Graph** is a representation of how the different identifiers relate to each other and how they are used to identify a profile.
+> The **Identity Graph** is a representation of how the different identifiers relate to each other and how are they used to identify a profile.
 
 In our example, three identities are tied together by a single event. This translates to: `A single customer profile `SWIMMER_ID` is associated with one event that ties together their Email_LC_SHA256, and ECID`.
 
@@ -156,10 +156,10 @@ We have:
 - ✅ Created namespaces for each one of them.
 - ✅ Defined the rules for the identity linking rules graph.
 
-The next step is to define how data is put together in a single profile. The process that takes all this data needs to follow a set of rules and policies called **Merge Policies**.
+The next step is to define how data is put together in a single profile, this is where the **Merge Policies** comes in.
 
 > [!NOTE]
-> **Merge Policies** are rules that tell Adobe Experience Platform how to bring fragments of data, and combine them in a prioritized manner to create a Real-Time Customer Profile.
+> **Merge Policies** are the rules that tell Adobe Experience Platform how to bring fragments of data, and combine them in a prioritized manner to create a Real-Time Customer Profile.
 >
 > **Identity Service** is a service within Experience Platform that links (or unlinks) identities to maintain identity graphs.
 
@@ -200,7 +200,7 @@ As an example, I created a field group called **SJ Identity Core v1**:
 </picture>
 
 **Identity Map VS Primary Identities**
-Identity Map is a field that provides flexibility on how do you store the identity used and how multiple identities are linked together. But it's a JSON object, making the update more complex. Don't get me wrong, I love using it whenever I can, but for a base profile schema, let's keep it simple.
+Identity Map is a field that provides flexibility on how do you store the identity used and how multiple identities are linked together. This field is a JSON object, making the update more complex. Don't get me wrong, I love using it whenever I can, but for a base profile schema, let's keep it simple.
 
 <picture>
   <img src="/adobe/aep/assets/IdentityStrategy-SchemaIdentity.png" alt="Schema Primary Identity" width="550" />
@@ -208,6 +208,8 @@ Identity Map is a field that provides flexibility on how do you store the identi
 
 > [!TIP]
 > Don't be shy to add descriptions. The more you can document your schemas the better. Adobe CX Enterprise Coworker and other AI tools will read them and have better understanding of your data.
+
+Don't forget to document this process and share it with anybody working in the project, as it will help them navigate the identities and follow the standard you've created.
 
 # Summary - Printable Version
 
