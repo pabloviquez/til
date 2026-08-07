@@ -7,11 +7,9 @@ I wanted to write a short guide to defining an identity strategy that holds up i
 The Identity Strategy is key when starting an Adobe Experience Platform (AEP) implementation, as it's the foundation for how the project will structure its data, how the different use-cases will be implemented, and how the data will be used to create a single customer view.
 
 > [!IMPORTANT]
-> A good identity strategy definition helps keep costs under control, as Adobe charges per **Addressable Audience**.
+> 👍🏼 A good identity strategy definition helps keep costs under control, as Adobe charges per **Addressable Audience**.
 >
-> A loose strategy can inflate profile counts due to fragmentation leading to higher costs and a more complex implementation.
->
-> Strict or aggressive strategy could cause profile collapse creating a bad customer experience and even legal issues.
+> 🪢 Strict or aggressive strategy can inflate profile counts due to fragmentation leading to higher costs and a more complex implementation. 🧶 A loose strategy could cause profile collapse creating a bad customer experience and even legal issues.
 
 An identity strategy should answer the following questions:
 - What makes a profile unique?
