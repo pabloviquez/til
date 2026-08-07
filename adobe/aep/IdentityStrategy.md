@@ -1,5 +1,7 @@
 # Guide for Identity Strategy
 
+**Tags** #AEP #AdobeExperiencePlatform #AdobeJourneyOptimizer #IdentityStrategy #IdentityGraph #MergePolicies
+
 ## Intro
 I wanted to write a short guide to defining an identity strategy that holds up in production based on my learnings and experiences. However, this requires providing context and going through some concepts that are important to understand before defining the strategy.
 
